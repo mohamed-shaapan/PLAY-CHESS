@@ -25,14 +25,10 @@ public class MAIN extends Application {
 
 	//*************************************************************
 	public void start(Stage primaryStage) throws Exception {
+		
 		//01_Initialize Application
-		
 		initializer=new ApplicationInitializer(this);
-		
-		
-		
 		initializer.initialize();
-		
 		
 		
 		//02_show final window

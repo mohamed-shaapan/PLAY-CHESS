@@ -1,9 +1,14 @@
 package applicationModule;
 
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -11,14 +16,47 @@ import javafx.stage.Stage;
 
 
 
-public class PendingInterface extends Application {
+public class DesiredUI extends Application {
 	
-	//private Stage primaryWindow;
-	//private Pane layout;
+
+	//01_APPLICATION ELEMENTS
+	//*************************************************
 	private Rectangle[] whiteBlocks;
 	private Rectangle[] coloredBlocks;
 	private GridPane innerField;
 
+	
+	//02_LAUNCH APPLICATION
+	//*************************************************
+	public static void main(String[] args) {
+		launch(args);
+	}
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		
+		//01_Initialize Application
+		initializeElements();
+		setElementStyling();
+		initializeWindowLayout();
+		
+		//02_Do extra stuff
+		String fileLoc="resources/images/white_team/queen.png";
+		InputStream location = new FileInputStream(fileLoc);
+        ImageView img=new ImageView(new Image(location));
+        innerField.add(img, 5, 5);
+
+		//03_Set Final Scene
+		Scene scene=new Scene(innerField);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+	}
+	
+	
+	//*********************************************************
+	//*********************************************************
+	//*********************************************************
 	private void initializeElements(){
 		whiteBlocks=new Rectangle[32];
 		coloredBlocks=new Rectangle[32];
@@ -29,8 +67,6 @@ public class PendingInterface extends Application {
 		createBlocks();
 		innerField.setPadding(new Insets(30,30,30,30));
 		innerField.setGridLinesVisible(true);
-		//innerField.setVgap(60);
-		//innerField.setHgap(60);
 	}
 	
 	private void initializeWindowLayout(){
@@ -38,42 +74,14 @@ public class PendingInterface extends Application {
 	}
 
 		
-	public static void main(String[] args) {
-		launch(args);
-	}
-	
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		
-		initializeElements();
-		setElementStyling();
-		initializeWindowLayout();
-		
-		
-		
-		//01_Initialize Application
-			//initializeApplication();
-			//primaryWindow=primaryStage;
-		//02_Set the final Scene:
-			Scene scene=new Scene(innerField);
-			primaryStage.setScene(scene);
-			//primaryStage.setResizable(false);
-			//primaryStage.setMinHeight(550);
-			//primaryStage.setMinWidth(900);
-		//03_Set Hot Keys----------------------------------------------
-			//setHotKeyEvents();
-			primaryStage.show();
-		
-	}
-	
+	//*********************************************************
+	//*********************************************************
+	//*********************************************************
 	private void createBlocks(){
 		for(int i=1; i<=32; i++){
 			Rectangle whiteBlock=new Rectangle(60,60);
 			whiteBlock.setFill(Color.SANDYBROWN);
 			whiteBlocks[i-1]=whiteBlock;
-			whiteBlock.setOnMouseClicked(e ->{
-				System.out.println("A7A");
-			});
 			
 			Rectangle coloredBlock=new Rectangle(60,60);
 			coloredBlock.setFill(Color.CHOCOLATE);
