@@ -6,7 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -116,9 +115,7 @@ public class LayoutInitializer {
 		//*****************************************************
 		VBox appControlBlock=new VBox();
 		Label b3=new Label("*****************************************");
-		appElements.getAppControlsLabel().setFont(Font.font("Verdana", FontWeight.BOLD, 13));
-		appElements.getAppControlsLabel().setTextFill(Color.SLATEGREY);
-		appControlBlock.getChildren().addAll(b3, appElements.getAppControlsLabel());
+		appControlBlock.getChildren().addAll(b3);
 		
 		HBox tmp11=new HBox();
 		appElements.getNewGameButton().setPrefWidth(50);
@@ -151,7 +148,12 @@ public class LayoutInitializer {
 		//E_DRAWING CANVAS
 		//*****************************************************
 		appElements.getCanvas().setMinSize(600, 400);
-		appElements.getCanvas().setClip(new Rectangle(3000,3000));
+		//appElements.getCanvas().setClip(new Rectangle(3000,3000));
+		appElements.getConsoleUIBoard().setEditable(false);
+		appElements.getConsoleUIBoard().setPadding(new Insets(30,30,30,30));
+		appElements.getConsoleUIBoard().setMinSize(500, 500);
+		appElements.getConsoleUIBoard().setText(BoardDrawer.drawBoard());
+		appElements.getCanvas().getChildren().add(appElements.getConsoleUIBoard());
 		appElements.getCanvas().setPadding(new Insets(30,30,30,30));
 		
 		HBox drawingCanvas=new HBox();

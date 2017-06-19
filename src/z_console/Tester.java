@@ -10,11 +10,11 @@ public class Tester {
 		ChessBoardSet gameBoard=new ChessBoardSet();
 		
 		BoardPrinter boardPrinter=new BoardPrinter(gameBoard);
-		boardPrinter.drawBoard();
 		
-		MovePieceCommand moveOperation=new MovePieceCommand(gameBoard, 0, 0, 0, 0);
+		MovePieceCommand moveOperation=new MovePieceCommand(gameBoard, 1, 0, 2, 0);
 		moveOperation.execute();
 
+		boardPrinter.drawBoard();
 	}
 
 }

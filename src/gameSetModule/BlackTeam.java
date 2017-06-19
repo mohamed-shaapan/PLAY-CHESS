@@ -17,6 +17,7 @@ public class BlackTeam {
 	//02_Constructor**********************
 	//*************************************************************************
 	public BlackTeam(ChessBoardSet gameBoard){
+		blackTeam=new Piece[16];
 		blackTeam[0]=new King(gameBoard, "KNG", "king", "black", "white", 1, true, 0, 4, 0, 4);
 		blackTeam[1]=new Queen(gameBoard, "QEN", "queen", "black", "white", 7, true, 0, 3, 0, 3);
 		blackTeam[2]=new Bishop(gameBoard, "BSH", "bishop", "black", "white", 7, true, 0, 2, 0, 2);

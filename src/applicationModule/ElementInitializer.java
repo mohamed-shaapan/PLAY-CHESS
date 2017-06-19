@@ -50,6 +50,7 @@ public class ElementInitializer {
 	//*****************************************************
 	private BorderPane layout;
 	private Pane canvas;
+	private TextArea consoleUIBoard;
 	
 	
 	
@@ -98,7 +99,7 @@ public class ElementInitializer {
 		//*****************************************************
 		canvas=new Pane();
 		layout=new BorderPane();
-		 
+		consoleUIBoard=new TextArea();
 
 	}
 
@@ -199,6 +200,11 @@ public class ElementInitializer {
 
 	public Pane getCanvas() {
 		return canvas;
+	}
+
+
+	public TextArea getConsoleUIBoard() {
+		return consoleUIBoard;
 	}
 
 
