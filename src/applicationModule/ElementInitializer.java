@@ -1,6 +1,8 @@
 package applicationModule;
 
 
+import java.io.FileNotFoundException;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -50,13 +52,14 @@ public class ElementInitializer {
 	//*****************************************************
 	private BorderPane layout;
 	private Pane canvas;
-	private TextArea consoleUIBoard;
+	//private TextArea consoleUIBoard;
+	private BoardUI boardUI;
 	
 	
 	
 	
 	//***********************************************************************
-	public void initialize(){
+	public void initialize() throws FileNotFoundException{
 		
 		//A_APP CONTROLS
 		//*****************************************************
@@ -99,8 +102,9 @@ public class ElementInitializer {
 		//*****************************************************
 		canvas=new Pane();
 		layout=new BorderPane();
-		consoleUIBoard=new TextArea();
-
+		//consoleUIBoard=new TextArea();
+		boardUI=new BoardUI();
+		
 	}
 
 
@@ -203,8 +207,13 @@ public class ElementInitializer {
 	}
 
 
-	public TextArea getConsoleUIBoard() {
+	/*public TextArea getConsoleUIBoard() {
 		return consoleUIBoard;
+	}*/
+
+
+	public BoardUI getBoardUI() {
+		return boardUI;
 	}
 
 

@@ -1,6 +1,8 @@
 package applicationModule;
 
 
+import java.io.FileNotFoundException;
+
 import applicationModule.ActionListenerInitializer;
 import applicationModule.ElementInitializer;
 import applicationModule.LayoutInitializer;
@@ -34,7 +36,7 @@ public class ApplicationInitializer {
 	
 	//03_METHODS
 	//*************************************************************
-	public void initialize(){
+	public void initialize() throws FileNotFoundException{
 		elements.initialize();
 		
 		layout.initialize();

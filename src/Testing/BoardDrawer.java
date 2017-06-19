@@ -1,4 +1,4 @@
-package applicationModule;
+package Testing;
 
 public class BoardDrawer {
 	

@@ -2,7 +2,6 @@ package applicationModule;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
@@ -25,51 +24,46 @@ public class BoardUI{
 	//02_CONSTRUCTOR
 	//*************************************************
 	public BoardUI() throws FileNotFoundException{
-		//initialize board
-		initializeElements();
-		setElementStyling();
-		initializeWindowLayout();
-		//do some extra stuff
-		/*String fileLoc="resources/images/white_team/queen.png";
-		InputStream location = new FileInputStream(fileLoc);
-        ImageView img=new ImageView(new Image(location));
-        boardLayout.add(img, 5, 5);*/
+		
+		initializeBoardElements();
+		setBoardStyling();
+		initializeBoardLayout();
 		
 	}
 	
 	//03_PRIVATE METHODS
 	//*********************************************************
-	private void initializeElements(){
+	private void initializeBoardElements(){
 		whiteBlocks=new Rectangle[32];
 		coloredBlocks=new Rectangle[32];
 		boardLayout=new GridPane();
 	}
 	
-	private void setElementStyling(){
-		createBlocks();
+	private void setBoardStyling(){
+		createBoardBlocks();
 		boardLayout.setPadding(new Insets(30,30,30,30));
 		boardLayout.setGridLinesVisible(true);
 	}
 	
-	private void initializeWindowLayout() throws FileNotFoundException{
-		addBlocks();
-		addPieces();
+	private void initializeBoardLayout() throws FileNotFoundException{
+		addBlocksToLayout();
+		addPiecesToLayout();
 	}
 
 	//*********************************************************
-	private void createBlocks(){
+	private void createBoardBlocks(){
 		for(int i=1; i<=32; i++){
-			Rectangle whiteBlock=new Rectangle(60,60);
+			Rectangle whiteBlock=new Rectangle(65,65);
 			whiteBlock.setFill(Color.SANDYBROWN);
 			whiteBlocks[i-1]=whiteBlock;
 			
-			Rectangle coloredBlock=new Rectangle(60,60);
+			Rectangle coloredBlock=new Rectangle(65,65);
 			coloredBlock.setFill(Color.CHOCOLATE);
 			coloredBlocks[i-1]=coloredBlock;
 		}
 	}
 	
-	private void addBlocks(){
+	private void addBlocksToLayout(){
 		int pointer1=1;
 		int pointer2=1;
 		for(int row=1; row<=8; row++){
@@ -98,14 +92,86 @@ public class BoardUI{
 		
 	}
 	
-	private void addPieces() throws FileNotFoundException{
+	//*********************************************************
+	private void addPiecesToLayout() throws FileNotFoundException{
+		createWhitePieces();
+		createBlackPieces();
+	}
+	
+	private void createWhitePieces() throws FileNotFoundException{
 		String whiteTeamLoc="resources/images/white_team/";
-		//String blackTeamLoc="resources/images/white_team/";
 		
-		String imgLoc=whiteTeamLoc+"king.png";
-		InputStream location = new FileInputStream(imgLoc);
-        ImageView img=new ImageView(new Image(location));
-        boardLayout.add(img, 5, 5);
+        ImageView king=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"king.png")));
+        ImageView queen=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"queen.png")));
+        ImageView bishop1=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"bishop.png")));
+        ImageView bishop2=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"bishop.png")));
+        ImageView knight1=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"knight.png")));
+        ImageView knight2=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"knight.png")));
+        ImageView rook1=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"rook.png")));
+        ImageView rook2=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"rook.png")));
+        ImageView pawn1=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"pawn.png")));
+        ImageView pawn2=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"pawn.png")));
+        ImageView pawn3=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"pawn.png")));
+        ImageView pawn4=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"pawn.png")));
+        ImageView pawn5=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"pawn.png")));
+        ImageView pawn6=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"pawn.png")));
+        ImageView pawn7=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"pawn.png")));
+        ImageView pawn8=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"pawn.png")));
+        
+        boardLayout.add(king, 4, 7);
+        boardLayout.add(queen, 3, 7);
+        boardLayout.add(bishop1, 2, 7);
+        boardLayout.add(bishop2, 5, 7);
+        boardLayout.add(knight1, 1, 7);
+        boardLayout.add(knight2, 6, 7);
+        boardLayout.add(rook1, 0, 7);
+        boardLayout.add(rook2, 7, 7);
+        boardLayout.add(pawn1, 0, 6);
+        boardLayout.add(pawn2, 1, 6);
+        boardLayout.add(pawn3, 2, 6);
+        boardLayout.add(pawn4, 3, 6);
+        boardLayout.add(pawn5, 4, 6);
+        boardLayout.add(pawn6, 5, 6);
+        boardLayout.add(pawn7, 6, 6);
+        boardLayout.add(pawn8, 7, 6);
+	}
+	
+	private void createBlackPieces() throws FileNotFoundException{
+		String blackTeamLoc="resources/images/black_team/";
+		
+        ImageView king=new ImageView(new Image(new FileInputStream(blackTeamLoc+"king.png")));
+        ImageView queen=new ImageView(new Image(new FileInputStream(blackTeamLoc+"queen.png")));
+        ImageView bishop1=new ImageView(new Image(new FileInputStream(blackTeamLoc+"bishop.png")));
+        ImageView bishop2=new ImageView(new Image(new FileInputStream(blackTeamLoc+"bishop.png")));
+        ImageView knight1=new ImageView(new Image(new FileInputStream(blackTeamLoc+"knight.png")));
+        ImageView knight2=new ImageView(new Image(new FileInputStream(blackTeamLoc+"knight.png")));
+        ImageView rook1=new ImageView(new Image(new FileInputStream(blackTeamLoc+"rook.png")));
+        ImageView rook2=new ImageView(new Image(new FileInputStream(blackTeamLoc+"rook.png")));
+        ImageView pawn1=new ImageView(new Image(new FileInputStream(blackTeamLoc+"pawn.png")));
+        ImageView pawn2=new ImageView(new Image(new FileInputStream(blackTeamLoc+"pawn.png")));
+        ImageView pawn3=new ImageView(new Image(new FileInputStream(blackTeamLoc+"pawn.png")));
+        ImageView pawn4=new ImageView(new Image(new FileInputStream(blackTeamLoc+"pawn.png")));
+        ImageView pawn5=new ImageView(new Image(new FileInputStream(blackTeamLoc+"pawn.png")));
+        ImageView pawn6=new ImageView(new Image(new FileInputStream(blackTeamLoc+"pawn.png")));
+        ImageView pawn7=new ImageView(new Image(new FileInputStream(blackTeamLoc+"pawn.png")));
+        ImageView pawn8=new ImageView(new Image(new FileInputStream(blackTeamLoc+"pawn.png")));
+        
+        boardLayout.add(king, 4, 0);
+        boardLayout.add(queen, 3, 0);
+        boardLayout.add(bishop1, 2, 0);
+        boardLayout.add(bishop2, 5, 0);
+        boardLayout.add(knight1, 1, 0);
+        boardLayout.add(knight2, 6, 0);
+        boardLayout.add(rook1, 0, 0);
+        boardLayout.add(rook2, 7, 0);
+        boardLayout.add(pawn1, 0, 1);
+        boardLayout.add(pawn2, 1, 1);
+        boardLayout.add(pawn3, 2, 1);
+        boardLayout.add(pawn4, 3, 1);
+        boardLayout.add(pawn5, 4, 1);
+        boardLayout.add(pawn6, 5, 1);
+        boardLayout.add(pawn7, 6, 1);
+        boardLayout.add(pawn8, 7, 1);
 	}
 	
 	//*********************************************************
