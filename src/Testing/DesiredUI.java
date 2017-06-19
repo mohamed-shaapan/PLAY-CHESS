@@ -1,7 +1,7 @@
 package Testing;
 
 
-import applicationModule.BoardUI;
+import applicationModule.BoardUIElement;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -20,7 +20,7 @@ public class DesiredUI extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		BoardUI board=new BoardUI();
+		BoardUIElement board=new BoardUIElement();
 		//03_Set Final Scene
 		Scene scene=new Scene(board.getBoard());
 		primaryStage.setScene(scene);

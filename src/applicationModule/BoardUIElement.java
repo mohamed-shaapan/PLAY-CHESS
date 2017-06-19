@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class BoardUI{
+public class BoardUIElement{
 	
 	
 	//01_ATTRIBUTES
@@ -24,7 +24,7 @@ public class BoardUI{
 	
 	//02_CONSTRUCTOR
 	//*************************************************
-	public BoardUI() throws FileNotFoundException{
+	public BoardUIElement() throws FileNotFoundException{
 		
 		initializeBoardElements();
 		setBoardStyling();

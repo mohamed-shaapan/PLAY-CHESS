@@ -16,8 +16,7 @@ public class ApplicationInitializer {
 	private ElementInitializer elements;
 	private LayoutInitializer layout;
 	private ActionListenerInitializer actionListeners;
-	//private CanvasControlsHandler canvasControls;
-	//private HotKeysHandler hotKeys;
+	//private HotKeysInitializer hotKeys;
 	
 	
 	//02_CONSTRUCTOR
@@ -27,8 +26,7 @@ public class ApplicationInitializer {
 		elements=new ElementInitializer();
 		layout=new LayoutInitializer(elements);
 		actionListeners=new ActionListenerInitializer(elements, layout);
-		//canvasControls=new CanvasControlsHandler(elements);
-		//hotKeys=new HotKeysHandler(elements);
+		//hotKeys=new HotKeysInitializer(elements);
 		
 		
 		
@@ -43,7 +41,6 @@ public class ApplicationInitializer {
 		application.setLayout(elements.getLayout());
 		
 		actionListeners.initialize();
-		//canvasControls.initialize();
 		//hotKeys.initialize();
 		
 	}

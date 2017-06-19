@@ -53,7 +53,7 @@ public class ElementInitializer {
 	private BorderPane layout;
 	private Pane canvas;
 	//private TextArea consoleUIBoard;
-	private BoardUI boardUI;
+	private BoardUIElement boardUI;
 	
 	
 	
@@ -103,7 +103,7 @@ public class ElementInitializer {
 		canvas=new Pane();
 		layout=new BorderPane();
 		//consoleUIBoard=new TextArea();
-		boardUI=new BoardUI();
+		boardUI=new BoardUIElement();
 		
 	}
 
@@ -212,7 +212,7 @@ public class ElementInitializer {
 	}*/
 
 
-	public BoardUI getBoardUI() {
+	public BoardUIElement getBoardUI() {
 		return boardUI;
 	}
 
