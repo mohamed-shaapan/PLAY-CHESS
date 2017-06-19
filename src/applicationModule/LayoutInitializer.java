@@ -150,7 +150,7 @@ public class LayoutInitializer {
 		appElements.getCanvas().setMinSize(600, 400);
 		//appElements.getCanvas().setClip(new Rectangle(3000,3000));
 		HBox tmp=new HBox();
-		tmp.setPadding(new Insets(10,100,50,90));
+		tmp.setPadding(new Insets(20,100,50,70));
 		
 		tmp.getChildren().add(appElements.getBoardUI().getBoard());
 		appElements.getCanvas().getChildren().add(tmp);

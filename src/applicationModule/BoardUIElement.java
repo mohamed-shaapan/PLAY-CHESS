@@ -3,23 +3,29 @@ package applicationModule;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class BoardUIElement{
 	
 	
 	//01_ATTRIBUTES
 	//*************************************************
+	final int cellSize=65;
 	private Rectangle[] whiteBlocks;
 	private Rectangle[] coloredBlocks;
-	private GridPane boardLayout;
+	private GridPane innerBoard;
 	private ImageView boardPieces[][];
+	private GridPane overallBoardShape;
 	
 	
 	//02_CONSTRUCTOR
@@ -29,6 +35,7 @@ public class BoardUIElement{
 		initializeBoardElements();
 		setBoardStyling();
 		initializeBoardLayout();
+		createOverallBoard();
 		
 	}
 	
@@ -38,13 +45,13 @@ public class BoardUIElement{
 		boardPieces=new ImageView[8][8];
 		whiteBlocks=new Rectangle[32];
 		coloredBlocks=new Rectangle[32];
-		boardLayout=new GridPane();
+		innerBoard=new GridPane();
+		overallBoardShape=new GridPane();
 	}
 	
 	private void setBoardStyling(){
 		createBoardBlocks();
-		boardLayout.setPadding(new Insets(30,30,30,30));
-		boardLayout.setGridLinesVisible(true);
+		innerBoard.setGridLinesVisible(true);
 	}
 	
 	private void initializeBoardLayout() throws FileNotFoundException{
@@ -55,11 +62,11 @@ public class BoardUIElement{
 	//*********************************************************
 	private void createBoardBlocks(){
 		for(int i=1; i<=32; i++){
-			Rectangle whiteBlock=new Rectangle(65,65);
+			Rectangle whiteBlock=new Rectangle(cellSize,cellSize);
 			whiteBlock.setFill(Color.SANDYBROWN);
 			whiteBlocks[i-1]=whiteBlock;
 			
-			Rectangle coloredBlock=new Rectangle(65,65);
+			Rectangle coloredBlock=new Rectangle(cellSize,cellSize);
 			coloredBlock.setFill(Color.CHOCOLATE);
 			coloredBlocks[i-1]=coloredBlock;
 		}
@@ -72,20 +79,20 @@ public class BoardUIElement{
 			if(row%2==0){
 				for(int col=1; col<=8; col++){
 					if(col%2==0){
-						boardLayout.add(whiteBlocks[pointer1-1], row-1, col-1);
+						innerBoard.add(whiteBlocks[pointer1-1], row-1, col-1);
 						pointer1++;
 					}else{
-						boardLayout.add(coloredBlocks[pointer2-1], row-1, col-1);
+						innerBoard.add(coloredBlocks[pointer2-1], row-1, col-1);
 						pointer2++;
 					}
 				}
 			}else{
 				for(int col=1; col<=8; col++){
 					if(col%2==0){
-						boardLayout.add(coloredBlocks[pointer2-1], row-1, col-1);
+						innerBoard.add(coloredBlocks[pointer2-1], row-1, col-1);
 						pointer2++;
 					}else{
-						boardLayout.add(whiteBlocks[pointer1-1], row-1, col-1);
+						innerBoard.add(whiteBlocks[pointer1-1], row-1, col-1);
 						pointer1++;
 					}
 				}
@@ -120,22 +127,22 @@ public class BoardUIElement{
         ImageView pawn7=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"pawn.png")));
         ImageView pawn8=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"pawn.png")));
         
-        boardLayout.add(king, 4, 7); boardPieces[7][4]=king;
-        boardLayout.add(queen, 3, 7); boardPieces[7][3]=queen;
-        boardLayout.add(bishop1, 2, 7); boardPieces[7][2]=bishop1;
-        boardLayout.add(bishop2, 5, 7); boardPieces[7][5]=bishop2;
-        boardLayout.add(knight1, 1, 7); boardPieces[7][1]=knight1;
-        boardLayout.add(knight2, 6, 7); boardPieces[7][6]=knight2;
-        boardLayout.add(rook1, 0, 7); boardPieces[7][0]=rook1;
-        boardLayout.add(rook2, 7, 7); boardPieces[7][7]=rook2;
-        boardLayout.add(pawn1, 0, 6); boardPieces[6][0]=pawn1;
-        boardLayout.add(pawn2, 1, 6); boardPieces[6][1]=pawn2;
-        boardLayout.add(pawn3, 2, 6); boardPieces[6][2]=pawn3;
-        boardLayout.add(pawn4, 3, 6); boardPieces[6][3]=pawn4;
-        boardLayout.add(pawn5, 4, 6); boardPieces[6][4]=pawn5;
-        boardLayout.add(pawn6, 5, 6); boardPieces[6][5]=pawn6;
-        boardLayout.add(pawn7, 6, 6); boardPieces[6][6]=pawn7;
-        boardLayout.add(pawn8, 7, 6); boardPieces[6][7]=pawn8;
+        innerBoard.add(king, 4, 7); boardPieces[7][4]=king;
+        innerBoard.add(queen, 3, 7); boardPieces[7][3]=queen;
+        innerBoard.add(bishop1, 2, 7); boardPieces[7][2]=bishop1;
+        innerBoard.add(bishop2, 5, 7); boardPieces[7][5]=bishop2;
+        innerBoard.add(knight1, 1, 7); boardPieces[7][1]=knight1;
+        innerBoard.add(knight2, 6, 7); boardPieces[7][6]=knight2;
+        innerBoard.add(rook1, 0, 7); boardPieces[7][0]=rook1;
+        innerBoard.add(rook2, 7, 7); boardPieces[7][7]=rook2;
+        innerBoard.add(pawn1, 0, 6); boardPieces[6][0]=pawn1;
+        innerBoard.add(pawn2, 1, 6); boardPieces[6][1]=pawn2;
+        innerBoard.add(pawn3, 2, 6); boardPieces[6][2]=pawn3;
+        innerBoard.add(pawn4, 3, 6); boardPieces[6][3]=pawn4;
+        innerBoard.add(pawn5, 4, 6); boardPieces[6][4]=pawn5;
+        innerBoard.add(pawn6, 5, 6); boardPieces[6][5]=pawn6;
+        innerBoard.add(pawn7, 6, 6); boardPieces[6][6]=pawn7;
+        innerBoard.add(pawn8, 7, 6); boardPieces[6][7]=pawn8;
 	}
 	
 	private void createBlackPieces() throws FileNotFoundException{
@@ -158,22 +165,63 @@ public class BoardUIElement{
         ImageView pawn7=new ImageView(new Image(new FileInputStream(blackTeamLoc+"pawn.png")));
         ImageView pawn8=new ImageView(new Image(new FileInputStream(blackTeamLoc+"pawn.png")));
         
-        boardLayout.add(king, 4, 0); boardPieces[0][4]=king;
-        boardLayout.add(queen, 3, 0); boardPieces[0][3]=queen;
-        boardLayout.add(bishop1, 2, 0); boardPieces[0][2]=bishop1;
-        boardLayout.add(bishop2, 5, 0); boardPieces[0][5]=bishop2;
-        boardLayout.add(knight1, 1, 0); boardPieces[0][1]=knight1;
-        boardLayout.add(knight2, 6, 0); boardPieces[0][6]=knight2;
-        boardLayout.add(rook1, 0, 0); boardPieces[0][0]=rook1;
-        boardLayout.add(rook2, 7, 0); boardPieces[0][7]=rook2;
-        boardLayout.add(pawn1, 0, 1); boardPieces[1][0]=pawn1;
-        boardLayout.add(pawn2, 1, 1); boardPieces[1][1]=pawn2;
-        boardLayout.add(pawn3, 2, 1); boardPieces[1][2]=pawn3;
-        boardLayout.add(pawn4, 3, 1); boardPieces[1][3]=pawn4;
-        boardLayout.add(pawn5, 4, 1); boardPieces[1][4]=pawn5;
-        boardLayout.add(pawn6, 5, 1); boardPieces[1][5]=pawn6;
-        boardLayout.add(pawn7, 6, 1); boardPieces[1][6]=pawn7;
-        boardLayout.add(pawn8, 7, 1); boardPieces[1][7]=pawn8;
+        innerBoard.add(king, 4, 0); boardPieces[0][4]=king;
+        innerBoard.add(queen, 3, 0); boardPieces[0][3]=queen;
+        innerBoard.add(bishop1, 2, 0); boardPieces[0][2]=bishop1;
+        innerBoard.add(bishop2, 5, 0); boardPieces[0][5]=bishop2;
+        innerBoard.add(knight1, 1, 0); boardPieces[0][1]=knight1;
+        innerBoard.add(knight2, 6, 0); boardPieces[0][6]=knight2;
+        innerBoard.add(rook1, 0, 0); boardPieces[0][0]=rook1;
+        innerBoard.add(rook2, 7, 0); boardPieces[0][7]=rook2;
+        innerBoard.add(pawn1, 0, 1); boardPieces[1][0]=pawn1;
+        innerBoard.add(pawn2, 1, 1); boardPieces[1][1]=pawn2;
+        innerBoard.add(pawn3, 2, 1); boardPieces[1][2]=pawn3;
+        innerBoard.add(pawn4, 3, 1); boardPieces[1][3]=pawn4;
+        innerBoard.add(pawn5, 4, 1); boardPieces[1][4]=pawn5;
+        innerBoard.add(pawn6, 5, 1); boardPieces[1][5]=pawn6;
+        innerBoard.add(pawn7, 6, 1); boardPieces[1][6]=pawn7;
+        innerBoard.add(pawn8, 7, 1); boardPieces[1][7]=pawn8;
+	}
+	
+	
+	private void createOverallBoard(){
+		
+		//row names
+		overallBoardShape.add(new Label("a"), 1, 0); overallBoardShape.add(new Label("a"), 1, 9);
+		overallBoardShape.add(new Label("b"), 2, 0); overallBoardShape.add(new Label("b"), 2, 9);
+		overallBoardShape.add(new Label("c"), 3, 0); overallBoardShape.add(new Label("c"), 3, 9);
+		overallBoardShape.add(new Label("d"), 4, 0); overallBoardShape.add(new Label("d"), 4, 9);
+		overallBoardShape.add(new Label("e"), 5, 0); overallBoardShape.add(new Label("e"), 5, 9);
+		overallBoardShape.add(new Label("f"), 6, 0); overallBoardShape.add(new Label("f"), 6, 9);
+		overallBoardShape.add(new Label("g"), 7, 0); overallBoardShape.add(new Label("g"), 7, 9);
+		overallBoardShape.add(new Label("h"), 8, 0); overallBoardShape.add(new Label("h"), 8, 9);
+		for(Node tmp: overallBoardShape.getChildren()){
+			Label label=(Label)tmp;
+			label.setMinSize(cellSize, 40);
+			label.setAlignment(Pos.CENTER); //GridPane.setHalignment(label, HPos.RIGHT);
+			label.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
+		}
+
+		//column names
+		overallBoardShape.add(new Label("1"), 0, 1); overallBoardShape.add(new Label("1"), 9, 1);
+		overallBoardShape.add(new Label("2"), 0, 2); overallBoardShape.add(new Label("2"), 9, 2);
+		overallBoardShape.add(new Label("3"), 0, 3); overallBoardShape.add(new Label("3"), 9, 3);
+		overallBoardShape.add(new Label("4"), 0, 4); overallBoardShape.add(new Label("4"), 9, 4);
+		overallBoardShape.add(new Label("5"), 0, 5); overallBoardShape.add(new Label("5"), 9, 5);
+		overallBoardShape.add(new Label("6"), 0, 6); overallBoardShape.add(new Label("6"), 9, 6);
+		overallBoardShape.add(new Label("7"), 0, 7); overallBoardShape.add(new Label("7"), 9, 7);
+		overallBoardShape.add(new Label("8"), 0, 8); overallBoardShape.add(new Label("8"), 9, 8);
+		for(int index=16; index<overallBoardShape.getChildren().size(); index++){
+			Node tmp=overallBoardShape.getChildren().get(index);
+			Label label=(Label)tmp;
+			label.setMinSize(40, cellSize);
+			label.setAlignment(Pos.CENTER); //GridPane.setHalignment(label, HPos.RIGHT);
+			label.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
+		}
+		
+		//actual board
+		overallBoardShape.add(innerBoard, 1, 1, 8, 8);
+		
 	}
 	
 	//*********************************************************
@@ -181,22 +229,22 @@ public class BoardUIElement{
 	
 	//04_INTERFACE METHODS
 	public Pane getBoard(){
-		return boardLayout;
+		return overallBoardShape;
 	}
 	
 	public void applyMove(int fromRow, int fromCol, int toRow, int toCol){
 		//remove from current location
 		ImageView piece=boardPieces[fromRow][fromCol];
-		boardLayout.getChildren().remove(piece);
+		innerBoard.getChildren().remove(piece);
 		boardPieces[fromRow][fromCol]=null;
 		//add to new location
-		boardLayout.add(piece, toCol, toRow);
+		innerBoard.add(piece, toCol, toRow);
 		boardPieces[toRow][toCol]=piece;
 	}
 	
 	public void removePiece(int row, int col){
 		ImageView piece=boardPieces[row][col];
-		boardLayout.getChildren().remove(piece);
+		innerBoard.getChildren().remove(piece);
 	}
 	
 	public void revivePromotePiece(int row, int col, String team, String pieceName){

@@ -32,7 +32,7 @@ public class MAIN extends Application {
 		
 		
 		//02_show final window
-		Scene scene=new Scene(layout, 1000, 600);
+		Scene scene=new Scene(layout, 1000, 650);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("Chess Game");
