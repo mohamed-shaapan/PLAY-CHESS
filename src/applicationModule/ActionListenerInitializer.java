@@ -51,7 +51,11 @@ public class ActionListenerInitializer {
 		//MOVE PIECE BUTTON
 		//**********************************
 		appElements.getMovePieceButton().setOnMouseClicked(e ->{
+			String fromCell=appElements.getMovePieceFrom().getText();
+			String toCell=appElements.getMovePieceTo().getText();
+			int[][] moveVector=obtainMoveLocation(fromCell, toCell);
 			
+			appElements.getBoardUI().applyMove(moveVector[0][0], moveVector[0][1], moveVector[1][0], moveVector[1][1]);
 			/*
 			resetTextFields();*/
 		});
@@ -78,6 +82,20 @@ public class ActionListenerInitializer {
 	//04_PRIVATE METHODS
 	//***************************************************************************
 
+	private int[][] obtainMoveLocation(String fromCell, String toCell){
+		int fromRow=Integer.parseInt(fromCell.substring(1))-1;
+		int fromCol = fromCell.charAt(0) - 'a';
+		
+		int toRow=Integer.parseInt(toCell.substring(1))-1;
+		int toCol=toCell.charAt(0) - 'a';
+		
+		int[][] result=new int[2][2];
+		result[0][0]=fromRow; result[0][1]=fromCol;
+		result[1][0]=toRow; result[1][1]=toCol;
+		
+		return result;
+		
+	}
 	
 	/*private void resetTextFields(){
 		appElements.getAddNodeName().setText("node name");

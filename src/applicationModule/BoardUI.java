@@ -19,6 +19,7 @@ public class BoardUI{
 	private Rectangle[] whiteBlocks;
 	private Rectangle[] coloredBlocks;
 	private GridPane boardLayout;
+	private ImageView boardPieces[][];
 	
 	
 	//02_CONSTRUCTOR
@@ -34,6 +35,7 @@ public class BoardUI{
 	//03_PRIVATE METHODS
 	//*********************************************************
 	private void initializeBoardElements(){
+		boardPieces=new ImageView[8][8];
 		whiteBlocks=new Rectangle[32];
 		coloredBlocks=new Rectangle[32];
 		boardLayout=new GridPane();
@@ -118,22 +120,22 @@ public class BoardUI{
         ImageView pawn7=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"pawn.png")));
         ImageView pawn8=new ImageView(new Image(new FileInputStream(whiteTeamLoc+"pawn.png")));
         
-        boardLayout.add(king, 4, 7);
-        boardLayout.add(queen, 3, 7);
-        boardLayout.add(bishop1, 2, 7);
-        boardLayout.add(bishop2, 5, 7);
-        boardLayout.add(knight1, 1, 7);
-        boardLayout.add(knight2, 6, 7);
-        boardLayout.add(rook1, 0, 7);
-        boardLayout.add(rook2, 7, 7);
-        boardLayout.add(pawn1, 0, 6);
-        boardLayout.add(pawn2, 1, 6);
-        boardLayout.add(pawn3, 2, 6);
-        boardLayout.add(pawn4, 3, 6);
-        boardLayout.add(pawn5, 4, 6);
-        boardLayout.add(pawn6, 5, 6);
-        boardLayout.add(pawn7, 6, 6);
-        boardLayout.add(pawn8, 7, 6);
+        boardLayout.add(king, 4, 7); boardPieces[7][4]=king;
+        boardLayout.add(queen, 3, 7); boardPieces[7][3]=queen;
+        boardLayout.add(bishop1, 2, 7); boardPieces[7][2]=bishop1;
+        boardLayout.add(bishop2, 5, 7); boardPieces[7][5]=bishop2;
+        boardLayout.add(knight1, 1, 7); boardPieces[7][1]=knight1;
+        boardLayout.add(knight2, 6, 7); boardPieces[7][6]=knight2;
+        boardLayout.add(rook1, 0, 7); boardPieces[7][0]=rook1;
+        boardLayout.add(rook2, 7, 7); boardPieces[7][7]=rook2;
+        boardLayout.add(pawn1, 0, 6); boardPieces[6][0]=pawn1;
+        boardLayout.add(pawn2, 1, 6); boardPieces[6][1]=pawn2;
+        boardLayout.add(pawn3, 2, 6); boardPieces[6][2]=pawn3;
+        boardLayout.add(pawn4, 3, 6); boardPieces[6][3]=pawn4;
+        boardLayout.add(pawn5, 4, 6); boardPieces[6][4]=pawn5;
+        boardLayout.add(pawn6, 5, 6); boardPieces[6][5]=pawn6;
+        boardLayout.add(pawn7, 6, 6); boardPieces[6][6]=pawn7;
+        boardLayout.add(pawn8, 7, 6); boardPieces[6][7]=pawn8;
 	}
 	
 	private void createBlackPieces() throws FileNotFoundException{
@@ -156,22 +158,22 @@ public class BoardUI{
         ImageView pawn7=new ImageView(new Image(new FileInputStream(blackTeamLoc+"pawn.png")));
         ImageView pawn8=new ImageView(new Image(new FileInputStream(blackTeamLoc+"pawn.png")));
         
-        boardLayout.add(king, 4, 0);
-        boardLayout.add(queen, 3, 0);
-        boardLayout.add(bishop1, 2, 0);
-        boardLayout.add(bishop2, 5, 0);
-        boardLayout.add(knight1, 1, 0);
-        boardLayout.add(knight2, 6, 0);
-        boardLayout.add(rook1, 0, 0);
-        boardLayout.add(rook2, 7, 0);
-        boardLayout.add(pawn1, 0, 1);
-        boardLayout.add(pawn2, 1, 1);
-        boardLayout.add(pawn3, 2, 1);
-        boardLayout.add(pawn4, 3, 1);
-        boardLayout.add(pawn5, 4, 1);
-        boardLayout.add(pawn6, 5, 1);
-        boardLayout.add(pawn7, 6, 1);
-        boardLayout.add(pawn8, 7, 1);
+        boardLayout.add(king, 4, 0); boardPieces[0][4]=king;
+        boardLayout.add(queen, 3, 0); boardPieces[0][3]=queen;
+        boardLayout.add(bishop1, 2, 0); boardPieces[0][2]=bishop1;
+        boardLayout.add(bishop2, 5, 0); boardPieces[0][5]=bishop2;
+        boardLayout.add(knight1, 1, 0); boardPieces[0][1]=knight1;
+        boardLayout.add(knight2, 6, 0); boardPieces[0][6]=knight2;
+        boardLayout.add(rook1, 0, 0); boardPieces[0][0]=rook1;
+        boardLayout.add(rook2, 7, 0); boardPieces[0][7]=rook2;
+        boardLayout.add(pawn1, 0, 1); boardPieces[1][0]=pawn1;
+        boardLayout.add(pawn2, 1, 1); boardPieces[1][1]=pawn2;
+        boardLayout.add(pawn3, 2, 1); boardPieces[1][2]=pawn3;
+        boardLayout.add(pawn4, 3, 1); boardPieces[1][3]=pawn4;
+        boardLayout.add(pawn5, 4, 1); boardPieces[1][4]=pawn5;
+        boardLayout.add(pawn6, 5, 1); boardPieces[1][5]=pawn6;
+        boardLayout.add(pawn7, 6, 1); boardPieces[1][6]=pawn7;
+        boardLayout.add(pawn8, 7, 1); boardPieces[1][7]=pawn8;
 	}
 	
 	//*********************************************************
@@ -183,11 +185,18 @@ public class BoardUI{
 	}
 	
 	public void applyMove(int fromRow, int fromCol, int toRow, int toCol){
-		
+		//remove from current location
+		ImageView piece=boardPieces[fromRow][fromCol];
+		boardLayout.getChildren().remove(piece);
+		boardPieces[fromRow][fromCol]=null;
+		//add to new location
+		boardLayout.add(piece, toCol, toRow);
+		boardPieces[toRow][toCol]=piece;
 	}
 	
 	public void removePiece(int row, int col){
-		
+		ImageView piece=boardPieces[row][col];
+		boardLayout.getChildren().remove(piece);
 	}
 	
 	public void revivePromotePiece(int row, int col, String team, String pieceName){
