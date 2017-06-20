@@ -2,8 +2,11 @@ package gameSetModule;
 
 import battlePiecesModule.BlankPiece;
 import battlePiecesModule.Piece;
+import commandHandlingModule.KingStatusHandler;
+import commandHandlingModule.MovePieceCommand;
+import commandHandlingModule.MoveValidator;
 
-public class ChessBoardSet {
+public class ChessBoardSet implements IChessGame{
 
 	//01_Attributes***********************
 	//*************************************************************************
@@ -12,6 +15,7 @@ public class ChessBoardSet {
 	private BlackTeam blackTeam;
 	private String playerTurn;
 	private String gameStatus;
+	private MoveValidator moveValidator;
 		
 		
 	//02_Constructor**********************
@@ -23,6 +27,7 @@ public class ChessBoardSet {
 		initializeBoardCells();
 		playerTurn="white";
 		gameStatus="ONGOING";
+		moveValidator=new MoveValidator(this);
 	}
 	//************************************
 	private void initializeBoardCells(){
@@ -44,7 +49,65 @@ public class ChessBoardSet {
 	}
 	
 	
-	//03_Methods**************************
+	//03_INTERFACE METHODS
+	//*************************************************************************
+	@Override
+	public boolean movePiece(int fromRow, int fromCol, int toRow, int toCol) {
+		//validate move
+		boolean validMove=moveValidator.validateMove(fromRow, fromCol, toRow, toCol);
+		if(validMove!=true){
+			System.out.println("Invalid Move!!");
+			return false;
+		}
+		//apply move
+		MovePieceCommand moveOperation=new MovePieceCommand(this, fromRow, fromCol, toRow, toCol);
+		moveOperation.execute();
+		//change player turn
+		playerTurn=gameBoard[toRow][toCol].getEnemy();
+		//check enemy team
+		String enemy=playerTurn;
+		Piece kingToTest;
+		if(enemy.equalsIgnoreCase("white")){
+			kingToTest=getWhiteTeam().getKing();
+		}else{
+			kingToTest=getBlackTeam().getKing();
+		}
+		boolean isKingInDanger=KingStatusHandler.isKingInDanger(this, kingToTest);
+		
+		return false;
+	}
+	@Override
+	public void promotePawn(int row, int column) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void undoMove() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void redoMove() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void startNewGame() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void saveGameProgress(String fileName) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void loadSavedGame(String fileName) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	//04_INTERNAL METHODS
 	//*************************************************************************
 	public Piece[][] getGameBoard() {
 		return gameBoard;
@@ -61,7 +124,6 @@ public class ChessBoardSet {
 	public String getGameStatus(){
 		return gameStatus;
 	}
-	
 	
 	
 	

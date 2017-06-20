@@ -28,7 +28,7 @@ public class KingValidLocations implements ValidLocations{
 	//03_Methods**************************
 	//*************************************************************************
 	@Override
-	public void setNextValidLocations() {
+	public ArrayList<int[]> generateNextValidLocations() {
 		nextValidLocations.clear();
 		currentRow=piece.getCurrentRow(); 
 		currentCol=piece.getCurrentColumn();
@@ -36,10 +36,6 @@ public class KingValidLocations implements ValidLocations{
 		setupHorizontalMoves();
 		setupDiagonalAMoves();
 		setupDiagonalBMoves();
-	}
-
-	@Override
-	public ArrayList<int[]> getNextValidLocations() {
 		return nextValidLocations;
 	}
 

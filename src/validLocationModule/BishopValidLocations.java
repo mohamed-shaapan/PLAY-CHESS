@@ -28,16 +28,12 @@ public class BishopValidLocations implements ValidLocations{
 	//03_Methods**************************
 	//*************************************************************************
 	@Override
-	public void setNextValidLocations() {
+	public ArrayList<int[]> generateNextValidLocations() {
 		nextValidLocations.clear();
 		currentRow=piece.getCurrentRow(); 
 		currentCol=piece.getCurrentColumn();
 		setupDiagonalAMoves();
 		setupDiagonalBMoves();
-	}
-
-	@Override
-	public ArrayList<int[]> getNextValidLocations() {
 		return nextValidLocations;
 	}
 

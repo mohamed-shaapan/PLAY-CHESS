@@ -1,4 +1,4 @@
-package z_console;
+package commons;
 
 import gameSetModule.ChessBoardSet;
 

@@ -46,9 +46,9 @@ public class KingStatusHandler {
 				if(currentCell.getTeam().equalsIgnoreCase(king.getTeam())){
 					break;
 				}
-				currentCell.setNextValidLocations();
+				currentCell.generateNextValidLocations();
 				int kingLocation[]={currentRow, currentColumn};
-				boolean isThreat=isKingATarget(currentCell.getNextValidLocations(), kingLocation);
+				boolean isThreat=isKingATarget(currentCell.generateNextValidLocations(), kingLocation);
 				if(isThreat==true){
 					return true;
 				}
@@ -69,9 +69,9 @@ public class KingStatusHandler {
 				if(currentCell.getTeam().equalsIgnoreCase(king.getTeam())){
 					break;
 				}
-				currentCell.setNextValidLocations();
+				currentCell.generateNextValidLocations();
 				int kingLocation[]={currentRow, currentColumn};
-				boolean isThreat=isKingATarget(currentCell.getNextValidLocations(), kingLocation);
+				boolean isThreat=isKingATarget(currentCell.generateNextValidLocations(), kingLocation);
 				if(isThreat==true){
 					return true;
 				}
@@ -103,9 +103,9 @@ public class KingStatusHandler {
 				if(currentCell.getTeam().equalsIgnoreCase(king.getTeam())){
 					break;
 				}
-				currentCell.setNextValidLocations();
+				currentCell.generateNextValidLocations();
 				int kingLocation[]={currentRow, currentColumn};
-				boolean isThreat=isKingATarget(currentCell.getNextValidLocations(), kingLocation);
+				boolean isThreat=isKingATarget(currentCell.generateNextValidLocations(), kingLocation);
 				if(isThreat==true){
 					return true;
 				}
@@ -126,9 +126,9 @@ public class KingStatusHandler {
 				if(currentCell.getTeam().equalsIgnoreCase(king.getTeam())){
 					break;
 				}
-				currentCell.setNextValidLocations();
+				currentCell.generateNextValidLocations();
 				int kingLocation[]={currentRow, currentColumn};
-				boolean isThreat=isKingATarget(currentCell.getNextValidLocations(), kingLocation);
+				boolean isThreat=isKingATarget(currentCell.generateNextValidLocations(), kingLocation);
 				if(isThreat==true){
 					return true;
 				}
@@ -162,9 +162,9 @@ public class KingStatusHandler {
 				if(currentCell.getTeam().equalsIgnoreCase(king.getTeam())){
 					break;
 				}
-				currentCell.setNextValidLocations();
+				currentCell.generateNextValidLocations();
 				int kingLocation[]={currentRow, currentColumn};
-				boolean isThreat=isKingATarget(currentCell.getNextValidLocations(), kingLocation);
+				boolean isThreat=isKingATarget(currentCell.generateNextValidLocations(), kingLocation);
 				if(isThreat==true){
 					return true;
 				}
@@ -186,9 +186,9 @@ public class KingStatusHandler {
 				if(currentCell.getTeam().equalsIgnoreCase(king.getTeam())){
 					break;
 				}
-				currentCell.setNextValidLocations();
+				currentCell.generateNextValidLocations();
 				int kingLocation[]={currentRow, currentColumn};
-				boolean isThreat=isKingATarget(currentCell.getNextValidLocations(), kingLocation);
+				boolean isThreat=isKingATarget(currentCell.generateNextValidLocations(), kingLocation);
 				if(isThreat==true){
 					return true;
 				}
@@ -221,9 +221,9 @@ public class KingStatusHandler {
 				if(currentCell.getTeam().equalsIgnoreCase(king.getTeam())){
 					break;
 				}
-				currentCell.setNextValidLocations();
+				currentCell.generateNextValidLocations();
 				int kingLocation[]={currentRow, currentColumn};
-				boolean isThreat=isKingATarget(currentCell.getNextValidLocations(), kingLocation);
+				boolean isThreat=isKingATarget(currentCell.generateNextValidLocations(), kingLocation);
 				if(isThreat==true){
 					return true;
 				}
@@ -245,9 +245,9 @@ public class KingStatusHandler {
 				if(currentCell.getTeam().equalsIgnoreCase(king.getTeam())){
 					break;
 				}
-				currentCell.setNextValidLocations();
+				currentCell.generateNextValidLocations();
 				int kingLocation[]={currentRow, currentColumn};
-				boolean isThreat=isKingATarget(currentCell.getNextValidLocations(), kingLocation);
+				boolean isThreat=isKingATarget(currentCell.generateNextValidLocations(), kingLocation);
 				if(isThreat==true){
 					return true;
 				}
@@ -278,9 +278,9 @@ public class KingStatusHandler {
 		try{
 			Piece currentCell=gameBoard.getGameBoard()[knightRow][knightCol];
 			if(currentCell.getTeam().equalsIgnoreCase(king.getEnemy())){
-				currentCell.setNextValidLocations();
+				currentCell.generateNextValidLocations();
 				int kingLocation[]={king.getCurrentRow(), king.getCurrentColumn()};
-				boolean isThreat=isKingATarget(currentCell.getNextValidLocations(), kingLocation);
+				boolean isThreat=isKingATarget(currentCell.generateNextValidLocations(), kingLocation);
 				if(isThreat==true){
 					return true;
 				}

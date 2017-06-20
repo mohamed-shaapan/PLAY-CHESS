@@ -22,7 +22,7 @@ public abstract class Piece {
 	private int initialRow; private int initialColumn;
 	private int currentRow; private int currentColumn;
 	
-	private ValidLocations nextValidLocations;
+	protected ValidLocations validLocations;
 	private ChessBoardSet gameBoard;
 		
 	//02_Constructor**********************
@@ -40,20 +40,14 @@ public abstract class Piece {
 		this.initialColumn = initialColumn;
 		this.currentRow = currentRow;
 		this.currentColumn = currentColumn;
-		setNextValidLocations();
 	}
 		
 	//03_Methods**************************
 	//*************************************************************************
-	
-	//Differences*****************************************
-	public abstract void setNextValidLocations();
-	
-	public ArrayList<int[]> getNextValidLocations(){
-		nextValidLocations.setNextValidLocations();
-		return nextValidLocations.getNextValidLocations();
+	public ArrayList<int[]> generateNextValidLocations(){
+		return validLocations.generateNextValidLocations();
 	}
-	
+
 	
 	
 	

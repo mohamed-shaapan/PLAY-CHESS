@@ -2,7 +2,7 @@ package gameSetModule;
 
 public interface IChessGame {
 	
-	public boolean movePiece(int fromRow, int fromColumn, int toRow, int toColumn);
+	public boolean movePiece(int fromRow, int fromCol, int toRow, int toCol);
 	public void promotePawn(int row, int column);
 	
 	public void undoMove();
