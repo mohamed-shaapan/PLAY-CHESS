@@ -45,7 +45,14 @@ public abstract class Piece {
 	//03_Methods**************************
 	//*************************************************************************
 	public ArrayList<int[]> generateNextValidLocations(){
+		
+		ArrayList<int[]> result=validLocations.generateNextValidLocations();
+		for(int cell[]:result){
+			System.out.println("Row : "+cell[0]+"\tCol : "+cell[1]);
+		}
+		
 		return validLocations.generateNextValidLocations();
+		
 	}
 
 	

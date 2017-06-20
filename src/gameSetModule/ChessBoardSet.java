@@ -2,24 +2,25 @@ package gameSetModule;
 
 import battlePiecesModule.BlankPiece;
 import battlePiecesModule.Piece;
-import commandHandlingModule.KingStatusHandler;
+import commandHandlingModule.GameStatusHandler;
 import commandHandlingModule.MovePieceCommand;
 import commandHandlingModule.MoveValidator;
 
 public class ChessBoardSet implements IChessGame{
 
-	//01_Attributes***********************
-	//*************************************************************************
+	//01_ATTRIBUTES
+	//*********************************************************
 	private Piece[][] gameBoard;
 	private WhiteTeam whiteTeam;
 	private BlackTeam blackTeam;
 	private String playerTurn;
 	private String gameStatus;
 	private MoveValidator moveValidator;
+	private GameStatusHandler gameStatusHandler;
 		
 		
-	//02_Constructor**********************
-	//*************************************************************************
+	//02_CONSTRUCTOR
+	//*********************************************************
 	public ChessBoardSet(){
 		gameBoard=new Piece[8][8];
 		whiteTeam=new WhiteTeam(this);
@@ -28,6 +29,7 @@ public class ChessBoardSet implements IChessGame{
 		playerTurn="white";
 		gameStatus="ONGOING";
 		moveValidator=new MoveValidator(this);
+		gameStatusHandler=new GameStatusHandler(this);
 	}
 	//************************************
 	private void initializeBoardCells(){
@@ -53,26 +55,21 @@ public class ChessBoardSet implements IChessGame{
 	//*************************************************************************
 	@Override
 	public boolean movePiece(int fromRow, int fromCol, int toRow, int toCol) {
-		//validate move
-		boolean validMove=moveValidator.validateMove(fromRow, fromCol, toRow, toCol);
-		if(validMove!=true){
-			System.out.println("Invalid Move!!");
-			return false;
+		if(!gameStatusHandler.isGameOver()){
+			//validate move
+			boolean validMove=moveValidator.validateMove(fromRow, fromCol, toRow, toCol);
+			if(validMove!=true){
+				System.out.println("Invalid Move!!");
+				return false;
+			}
+			//apply move
+			MovePieceCommand moveOperation=new MovePieceCommand(this, fromRow, fromCol, toRow, toCol);
+			moveOperation.execute();
+			//change player turn
+			playerTurn=gameBoard[toRow][toCol].getEnemy();
+			//update game status
+			gameStatusHandler.updateGameStatus(playerTurn);	
 		}
-		//apply move
-		MovePieceCommand moveOperation=new MovePieceCommand(this, fromRow, fromCol, toRow, toCol);
-		moveOperation.execute();
-		//change player turn
-		playerTurn=gameBoard[toRow][toCol].getEnemy();
-		//check enemy team
-		String enemy=playerTurn;
-		Piece kingToTest;
-		if(enemy.equalsIgnoreCase("white")){
-			kingToTest=getWhiteTeam().getKing();
-		}else{
-			kingToTest=getBlackTeam().getKing();
-		}
-		boolean isKingInDanger=KingStatusHandler.isKingInDanger(this, kingToTest);
 		
 		return false;
 	}

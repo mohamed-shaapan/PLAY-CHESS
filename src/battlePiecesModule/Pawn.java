@@ -1,7 +1,7 @@
 package battlePiecesModule;
 
 import gameSetModule.ChessBoardSet;
-import validLocationModule.PawnValidLocations;
+import validLocationModule.QueenValidLocations;
 
 public class Pawn extends Piece{
 
@@ -12,7 +12,7 @@ public class Pawn extends Piece{
 			boolean active, int initialRow, int initialColumn, int currentRow, int currentColumn) {
 		super(gameBoard, displayName, type, team, enemy, step, active, initialRow, initialColumn, currentRow, currentColumn);
 		//valid locations object
-		validLocations=new PawnValidLocations(this, getGameBoard());
+		validLocations=new QueenValidLocations(this, getGameBoard());
 	}
 
 

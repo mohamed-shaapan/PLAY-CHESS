@@ -24,10 +24,12 @@ public class MoveValidator {
 	//03_INTERFACE METHODS
 	//*************************************************************************
 	public boolean validateMove(int fromRow, int fromCol, int toRow, int toCol){
+		//System.out.println("\n*********************************");
 		this.fromRow=fromRow; this.fromCol=fromCol;
 		this.toRow=toRow; this.toCol=toCol;
 		//validate player turn
 		boolean validPlayerTurn=validatePlayerTurn();
+		//System.out.println("Valid Player Turn : "+validPlayerTurn);
 		/*
 		 * valid piece location
 		 * 1. free route
@@ -37,8 +39,10 @@ public class MoveValidator {
 		 * 5. within board limits
 		 */
 		boolean validTargetCell=validateTargetCell();
+		//System.out.println("Valid Target Cell : "+validTargetCell);
 		//will my king become in danger because of this move
 		boolean isMyKingInDanger=doesMyKingBecomeInDanger();
+		//System.out.println("King in Danger : "+isMyKingInDanger);
 		//return test value
 		if(validPlayerTurn&&validTargetCell&&(!isMyKingInDanger)){
 			return true;
