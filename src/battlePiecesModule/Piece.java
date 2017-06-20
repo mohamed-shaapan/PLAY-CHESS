@@ -40,15 +40,17 @@ public abstract class Piece {
 		this.initialColumn = initialColumn;
 		this.currentRow = currentRow;
 		this.currentColumn = currentColumn;
-		nextValidLocations=setNextValidLocations();
+		setNextValidLocations();
 	}
 		
 	//03_Methods**************************
 	//*************************************************************************
 	
 	//Differences*****************************************
-	public abstract ValidLocations setNextValidLocations();
+	public abstract void setNextValidLocations();
+	
 	public ArrayList<int[]> getNextValidLocations(){
+		nextValidLocations.setNextValidLocations();
 		return nextValidLocations.getNextValidLocations();
 	}
 	

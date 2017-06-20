@@ -13,7 +13,7 @@ public class BlankPiece extends Piece{
 	//02_Methods**************************
 	//*************************************************************************
 	@Override
-	public ValidLocations setNextValidLocations() {
+	public void setNextValidLocations() {
 		return null;
 	}
 	

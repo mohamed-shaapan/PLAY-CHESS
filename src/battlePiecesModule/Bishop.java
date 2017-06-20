@@ -16,7 +16,7 @@ public class Bishop extends Piece{
 	//02_Methods**************************
 	//*************************************************************************
 	@Override
-	public ValidLocations setNextValidLocations() {
+	public void setNextValidLocations() {
 		return new BishopValidLocations(this, getGameBoard());
 	}
 	

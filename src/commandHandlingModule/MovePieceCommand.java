@@ -1,17 +1,21 @@
 package commandHandlingModule;
 
+import java.util.ArrayList;
+
+import battlePiecesModule.BlankPiece;
+import battlePiecesModule.Piece;
 import gameSetModule.ChessBoardSet;
 
 public class MovePieceCommand {
 	
-	//01_Attributes***********************
+	//01_ATTRIBUTES
 	//*************************************************************************
 	private ChessBoardSet chessBoard;
 	private int fromRow; private int fromCol;
 	private int toRow; private int toCol;
 	
 	
-	//02_Constructor**********************
+	//02_CONSTRUCTOR
 	//*************************************************************************
 	public MovePieceCommand(ChessBoardSet chessBoard, int fromRow, int fromCol, int toRow, int toCol){
 		this.chessBoard=chessBoard;
@@ -22,20 +26,35 @@ public class MovePieceCommand {
 	}
 	
 	
-	//03_Methods**************************
+	//03_INTERFACE METHODS
 	//*************************************************************************
 	public void execute(){
-		/*boolean playerTurnTest=testPlayerTurn();
+		//validate player turn
+		boolean playerTurnTest=validatePlayerTurn();
+		System.out.println("Player Turn Test : "+playerTurnTest);
+		/*
+		 * valid piece location
+		 * 1. free route
+		 * 2. legal piece location
+		 * 3. enemy occupied
+		 * 4. different cell
+		 * 5. within board limits
+		 */
 		boolean validTargetCell=validateTargetCell();
-		//FreeRouteTester.
-		if(playerTurnTest&&validTargetCell){
+		System.out.println("Valid Target Cell : "+validTargetCell);
+		//will my king become in danger because of this move
+		boolean isMyKingInDanger=doesMyKingBecomeInDanger();
+		//implement move
+		if(playerTurnTest&&validTargetCell/*&&(!isMyKingInDanger)*/){
 			applyMove();
-		}*/
+		}
 		
 	}
 	
-	//**********************************************************************************
-	private boolean testPlayerTurn(){
+	
+	//04_INTERNAL METHODS
+	//*************************************************************************
+	private boolean validatePlayerTurn(){
 		String playerTurn=chessBoard.getPlayerTurn();
 		String currentPlayer=chessBoard.getGameBoard()[fromRow][fromCol].getTeam();
 		if(currentPlayer.equalsIgnoreCase(playerTurn)){
@@ -44,24 +63,72 @@ public class MovePieceCommand {
 		return false;
 	}
 	//**********************************************************************************
-	/*private boolean validateTargetCell(){
-		int[][][] nextValidLocations=chessBoard.getGameBoard()[fromRow][fromCol].getNextValidLocations();
-		int height=nextValidLocations.length;
-		int width=nextValidLocations[0].length;
-		for(int i=1; i<=height; i++){
-			for(int j=1; j<=width; j++){
-				int possibleValidRow=nextValidLocations[i-1][j-1][0];
-				int possibleValidCol=nextValidLocations[i-1][j-1][1];
-				if((possibleValidRow==toRow)||(possibleValidCol==toCol)){
-					return true;
-				}
+	private boolean validateTargetCell(){
+		chessBoard.getGameBoard()[fromRow][fromCol].setNextValidLocations();
+		ArrayList<int[]> nextValidLocations=chessBoard.getGameBoard()[fromRow][fromCol].getNextValidLocations();
+		System.out.println("# of locations : "+nextValidLocations.size());
+		for(int[] cell:nextValidLocations){
+			
+			int possibleValidRow=cell[0]; System.out.println("Possible Row : "+cell[0]);
+			int possibleValidCol=cell[1]; System.out.println("Possible Col : "+cell[1]);
+			if((possibleValidRow==toRow)&&(possibleValidCol==toCol)){
+				return true;
 			}
 		}
 		return false;
-	}*/
+	}
 	//**********************************************************************************
 	private void applyMove(){
+		//kill target enemy (if exists)
+		String enemy=chessBoard.getGameBoard()[fromRow][fromCol].getEnemy();
+		String targetCellTeam=chessBoard.getGameBoard()[toRow][toCol].getTeam();
+		if(targetCellTeam.equalsIgnoreCase(enemy)){
+			chessBoard.getGameBoard()[fromRow][fromCol].setActive(false);
+		}
+		//move piece to specified location
+		Piece pieceToMove=chessBoard.getGameBoard()[fromRow][fromCol];
+		chessBoard.getGameBoard()[fromRow][fromCol]=new BlankPiece();
+		chessBoard.getGameBoard()[toRow][toCol]=pieceToMove;
+		pieceToMove.setCurrentRow(toRow); pieceToMove.setCurrentColumn(toCol);
+		//examine promotion eligibility
+		//
+	}
+	//**********************************************************************************
+	private boolean doesMyKingBecomeInDanger(){
+		/*
+		 * this method applies the move then undoes
+		 * simply to test will my king become in danger
+		 */
+		//kill target enemy (if exists)*******************
+		String enemy=chessBoard.getGameBoard()[fromRow][fromCol].getEnemy();
+		String targetCellTeam=chessBoard.getGameBoard()[toRow][toCol].getTeam();
+		Piece targetCellPiece=chessBoard.getGameBoard()[toRow][toCol];
+		if(targetCellTeam.equalsIgnoreCase(enemy)){
+			chessBoard.getGameBoard()[fromRow][fromCol].setActive(false);
+		}
+		//move piece to specified location****************
+		Piece pieceToMove=chessBoard.getGameBoard()[fromRow][fromCol];
+		chessBoard.getGameBoard()[fromRow][fromCol]=new BlankPiece();
+		chessBoard.getGameBoard()[toRow][toCol]=pieceToMove;
+		pieceToMove.setCurrentRow(toRow); pieceToMove.setCurrentColumn(toCol);
+		//test king status********************************
+		String team=pieceToMove.getTeam();
+		Piece kingToTest;
+		if(team.equalsIgnoreCase("white")){
+			kingToTest=chessBoard.getWhiteTeam().getKing();
+		}else{
+			kingToTest=chessBoard.getBlackTeam().getKing();
+		}
+		boolean isKingInDanger=KingStatusHandler.isKingInDanger(chessBoard, kingToTest);
+		//undo move***************************************
+		chessBoard.getGameBoard()[fromRow][fromCol]=pieceToMove;
+		pieceToMove.setCurrentRow(fromRow); pieceToMove.setCurrentColumn(fromCol);
+		chessBoard.getGameBoard()[toRow][toCol]=targetCellPiece;
+		if(targetCellTeam.equalsIgnoreCase(enemy)){
+			chessBoard.getGameBoard()[fromRow][fromCol].setActive(true);
+		}
 		
+		return isKingInDanger;
 	}
 	
 	

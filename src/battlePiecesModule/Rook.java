@@ -16,7 +16,7 @@ public class Rook extends Piece{
 
 	//02_Methods**************************
 	@Override
-	public ValidLocations setNextValidLocations() {
+	public void setNextValidLocations() {
 		return new RookValidLocations(this, getGameBoard());
 	}
 	

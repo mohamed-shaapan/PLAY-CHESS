@@ -19,7 +19,7 @@ public class Knight extends Piece{
 	//02_Methods**************************
 	//*************************************************************************
 	@Override
-	public ValidLocations setNextValidLocations() {
+	public void setNextValidLocations() {
 		return new KnightValidLocations(this, getGameBoard());
 	}
 }

@@ -18,7 +18,7 @@ public class Queen extends Piece{
 	//02_Methods**************************
 	//*************************************************************************
 	@Override
-	public ValidLocations setNextValidLocations() {
+	public void setNextValidLocations() {
 		return new QueenValidLocations(this, getGameBoard());
 	}
 	

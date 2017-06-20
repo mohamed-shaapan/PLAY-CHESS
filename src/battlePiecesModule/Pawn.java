@@ -18,7 +18,7 @@ public class Pawn extends Piece{
 	//03_Methods**************************
 	//*************************************************************************
 	@Override
-	public ValidLocations setNextValidLocations() {
+	public void setNextValidLocations() {
 		return new PawnValidLocations(this, getGameBoard());
 	}
 
