@@ -2,6 +2,7 @@ package applicationModule;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -25,6 +26,7 @@ public class BoardUIElement{
 	private Rectangle[] coloredBlocks;
 	private GridPane innerBoard;
 	private ImageView boardPieces[][];
+	private HashMap<Rectangle, Integer[]> boardCells;
 	private GridPane overallBoardShape;
 	
 	
@@ -35,6 +37,7 @@ public class BoardUIElement{
 		initializeBoardElements();
 		setBoardStyling();
 		initializeBoardLayout();
+		setActionListeners();
 		createOverallBoard();
 		
 	}
@@ -43,6 +46,7 @@ public class BoardUIElement{
 	//*********************************************************
 	private void initializeBoardElements(){
 		boardPieces=new ImageView[8][8];
+		boardCells=new HashMap<Rectangle, Integer[]>();
 		whiteBlocks=new Rectangle[32];
 		coloredBlocks=new Rectangle[32];
 		innerBoard=new GridPane();
@@ -80,9 +84,12 @@ public class BoardUIElement{
 				for(int col=1; col<=8; col++){
 					if(col%2==0){
 						innerBoard.add(whiteBlocks[pointer1-1], row-1, col-1);
+						//boardCells[row-1][col-1]=whiteBlocks[pointer1-1];
+						boardCells.put(whiteBlocks[pointer1-1], new Integer[]{row-1, col-1});
 						pointer1++;
 					}else{
 						innerBoard.add(coloredBlocks[pointer2-1], row-1, col-1);
+						boardCells.put(coloredBlocks[pointer2-1], new Integer[]{row-1, col-1});
 						pointer2++;
 					}
 				}
@@ -90,9 +97,11 @@ public class BoardUIElement{
 				for(int col=1; col<=8; col++){
 					if(col%2==0){
 						innerBoard.add(coloredBlocks[pointer2-1], row-1, col-1);
+						boardCells.put(coloredBlocks[pointer2-1], new Integer[]{row-1, col-1});
 						pointer2++;
 					}else{
 						innerBoard.add(whiteBlocks[pointer1-1], row-1, col-1);
+						boardCells.put(whiteBlocks[pointer1-1], new Integer[]{row-1, col-1});
 						pointer1++;
 					}
 				}
@@ -240,6 +249,9 @@ public class BoardUIElement{
 		//add to new location
 		innerBoard.add(piece, toCol, toRow);
 		boardPieces[toRow][toCol]=piece;
+		//other stuff
+		piece.setOpacity(1);
+		selectedPiece=null;
 	}
 	
 	public void removePiece(int row, int col){
@@ -251,7 +263,95 @@ public class BoardUIElement{
 		
 	}
 	
+	//*********************************************************************
+	private int moveFromRow;
+	private int moveFromCol;
+	
+	private int currentRow;
+	private int currentCol;
+	
+	private ImageView selectedPiece;
+	
 
+	private void setActionListeners(){
+		//Board Cells
+		for(Rectangle shape:whiteBlocks){
+			setCellEvents(shape);
+		}
+		for(Rectangle shape:coloredBlocks){
+			setCellEvents(shape);
+		}
+		//Board Pieces
+		for(ImageView row[]:boardPieces){
+			for(ImageView piece:row){
+				if(piece==null){continue;}
+				setPieceEvents(piece);
+			}
+		}
+	}
+	
+	
+	private void setCellEvents(Rectangle cell){
+		cell.setOnMouseEntered(e ->{
+			Integer[] cellLocation=boardCells.get(cell);
+			currentRow=cellLocation[1];
+			currentCol=cellLocation[0];
+			//System.out.println("Row : "+currentRow+"    Col : "+currentCol);
+		});
+		cell.setOnMouseClicked(e ->{
+			if(selectedPiece!=null){
+				applyMove(moveFromRow, moveFromCol, currentRow, currentCol);
+			}
+		});
+	}
+	
+	private void setPieceEvents(ImageView piece){
+		piece.setOnMouseClicked(e ->{
+			moveFromRow=currentRow;
+			moveFromCol=currentCol;
+			if(selectedPiece==null){
+				piece.setOpacity(0.5);
+				selectedPiece=piece;
+			}else{
+				selectedPiece.setOpacity(1);
+				if(selectedPiece.equals(piece)){
+					selectedPiece=null;
+				}else{
+					piece.setOpacity(0.5);
+					selectedPiece=piece;
+				}
+			}
+		});
+	}
+	
+	
+	/*
+	private double cursorOriginalX;
+	private double cursorOriginalY;
+	
+	private void setPieceDragEvent(ImageView shape){
+		shape.setOnMousePressed(e ->{
+			cursorOriginalX=e.getX();
+			cursorOriginalY=e.getY();
+			
+			moveFromRow=currentRow;
+			moveFromCol=currentCol;
+			
+		});
+		shape.setOnMouseDragged(e ->{
+			double deltaX=e.getX()-cursorOriginalX;
+			double deltaY=e.getY()-cursorOriginalY;
+			
+			shape.setTranslateX(shape.getTranslateX()+deltaX);
+			shape.setTranslateY(shape.getTranslateY()+deltaY);
+		});
+		
+		shape.setOnMouseDragReleased(e ->{
+			
+			System.out.println("Success");
+			//applyMove(moveFromRow, moveFromCol, currentRow, currentCol);
+		});
+	}*/
 
 	
 }

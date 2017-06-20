@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -148,7 +149,7 @@ public class LayoutInitializer {
 		//E_DRAWING CANVAS
 		//*****************************************************
 		appElements.getCanvas().setMinSize(600, 400);
-		//appElements.getCanvas().setClip(new Rectangle(3000,3000));
+		appElements.getCanvas().setClip(new Rectangle(3000,3000));
 		HBox tmp=new HBox();
 		tmp.setPadding(new Insets(20,100,50,70));
 		
