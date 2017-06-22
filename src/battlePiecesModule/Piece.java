@@ -2,7 +2,7 @@ package battlePiecesModule;
 
 import java.util.ArrayList;
 
-import gameSetModule.ChessBoardSet;
+import gameSetModule.ChessGame;
 import validLocationModule.ValidLocations;
 
 public abstract class Piece {
@@ -23,11 +23,11 @@ public abstract class Piece {
 	private int currentRow; private int currentColumn;
 	
 	protected ValidLocations validLocations;
-	private ChessBoardSet gameBoard;
+	private ChessGame gameBoard;
 		
 	//02_Constructor**********************
 	//*************************************************************************
-	public Piece(ChessBoardSet gameBoard, String displayName, String type, String team, String enemy, int step, boolean active, int initialRow,
+	public Piece(ChessGame gameBoard, String displayName, String type, String team, String enemy, int step, boolean active, int initialRow,
 		int initialColumn, int currentRow, int currentColumn) {
 		this.gameBoard=gameBoard;
 		this.displayName = displayName;
@@ -116,7 +116,7 @@ public abstract class Piece {
 	public int getCurrentColumn() {
 		return currentColumn;
 	}
-	public ChessBoardSet getGameBoard(){
+	public ChessGame getGameBoard(){
 		return gameBoard;
 	}
 	

@@ -16,7 +16,7 @@ public class WhiteTeam {
 	
 	//02_Constructor**********************
 	//*************************************************************************
-	public WhiteTeam(ChessBoardSet gameBoard){
+	public WhiteTeam(ChessGame gameBoard){
 		whiteTeam=new Piece[16];
 		whiteTeam[0]=new King(gameBoard, "KNG", "king", "white", "black", 1, true, 7, 4, 7, 4);
 		whiteTeam[1]=new Queen(gameBoard, "QEN", "queen", "white", "black", 7, true, 7, 3, 7, 3);

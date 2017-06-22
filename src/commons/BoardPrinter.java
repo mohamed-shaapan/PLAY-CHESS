@@ -1,17 +1,17 @@
 package commons;
 
-import gameSetModule.ChessBoardSet;
+import gameSetModule.ChessGame;
 
 public class BoardPrinter {
 	
 	//01_Attributes***********************
 	//*************************************************************************
-	private ChessBoardSet gameBoard;
+	private ChessGame gameBoard;
 
 
 	//02_Constructor**********************
 	//*************************************************************************
-	public BoardPrinter(ChessBoardSet gameBoard){
+	public BoardPrinter(ChessGame gameBoard){
 		this.gameBoard=gameBoard;
 	}
 	

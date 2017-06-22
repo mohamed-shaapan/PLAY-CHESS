@@ -6,7 +6,7 @@ import commandHandlingModule.GameStatusHandler;
 import commandHandlingModule.MovePieceCommand;
 import commandHandlingModule.MoveValidator;
 
-public class ChessBoardSet implements IChessGame{
+public class ChessGame implements IChessGame{
 
 	//01_ATTRIBUTES
 	//*********************************************************
@@ -21,7 +21,7 @@ public class ChessBoardSet implements IChessGame{
 		
 	//02_CONSTRUCTOR
 	//*********************************************************
-	public ChessBoardSet(){
+	public ChessGame(){
 		gameBoard=new Piece[8][8];
 		whiteTeam=new WhiteTeam(this);
 		blackTeam=new BlackTeam(this);

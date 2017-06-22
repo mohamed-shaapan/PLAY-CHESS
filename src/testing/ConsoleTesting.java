@@ -1,7 +1,7 @@
 package testing;
 
 import commons.BoardPrinter;
-import gameSetModule.ChessBoardSet;
+import gameSetModule.ChessGame;
 
 public class ConsoleTesting {
 
@@ -16,7 +16,7 @@ public class ConsoleTesting {
 	//02_TEST CRITERIA
 	//*****************************************************
 	private static void genericTest(){
-		ChessBoardSet gameBoard=new ChessBoardSet();
+		ChessGame gameBoard=new ChessGame();
 		BoardPrinter boardPrinter=new BoardPrinter(gameBoard);
 
 		

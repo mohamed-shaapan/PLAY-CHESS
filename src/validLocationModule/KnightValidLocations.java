@@ -3,7 +3,7 @@ package validLocationModule;
 import java.util.ArrayList;
 
 import battlePiecesModule.Piece;
-import gameSetModule.ChessBoardSet;
+import gameSetModule.ChessGame;
 
 public class KnightValidLocations implements ValidLocations{
 
@@ -11,13 +11,13 @@ public class KnightValidLocations implements ValidLocations{
 	//*************************************************************************
 	private ArrayList<int[]> nextValidLocations;
 	private Piece piece;
-	private ChessBoardSet gameBoard;
+	private ChessGame gameBoard;
 	private int currentRow; private int currentCol;
 	
 	
 	//02_Constructor**********************
 	//*************************************************************************
-	public KnightValidLocations(Piece piece, ChessBoardSet gameBoard) {
+	public KnightValidLocations(Piece piece, ChessGame gameBoard) {
 		this.piece=piece;
 		this.gameBoard=gameBoard;
 		nextValidLocations=new ArrayList<int[]>();

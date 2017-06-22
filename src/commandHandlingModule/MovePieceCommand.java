@@ -2,20 +2,20 @@ package commandHandlingModule;
 
 import battlePiecesModule.BlankPiece;
 import battlePiecesModule.Piece;
-import gameSetModule.ChessBoardSet;
+import gameSetModule.ChessGame;
 
 public class MovePieceCommand {
 	
 	//01_ATTRIBUTES
 	//*************************************************************************
-	private ChessBoardSet gameSet;
+	private ChessGame gameSet;
 	private int fromRow; private int fromCol;
 	private int toRow; private int toCol;
 	
 	
 	//02_CONSTRUCTOR
 	//*************************************************************************
-	public MovePieceCommand(ChessBoardSet chessBoard, int fromRow, int fromCol, int toRow, int toCol){
+	public MovePieceCommand(ChessGame chessBoard, int fromRow, int fromCol, int toRow, int toCol){
 		this.gameSet=chessBoard;
 		this.fromRow=fromRow;
 		this.fromCol=fromCol;

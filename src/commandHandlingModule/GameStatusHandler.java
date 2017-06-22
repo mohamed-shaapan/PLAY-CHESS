@@ -3,20 +3,20 @@ package commandHandlingModule;
 import java.util.ArrayList;
 
 import battlePiecesModule.Piece;
-import gameSetModule.ChessBoardSet;
+import gameSetModule.ChessGame;
 
 public class GameStatusHandler {
 
 	//01_ATTRIBUTES
 	//*********************************************************
 	private boolean gameOver;
-	private ChessBoardSet gameBoard;
+	private ChessGame gameBoard;
 	private MoveValidator moveValidator;
 	
 	
 	//02_CONSTRUCTOR
 	//*********************************************************
-	public GameStatusHandler(ChessBoardSet gameBoard) {
+	public GameStatusHandler(ChessGame gameBoard) {
 		gameOver=false;
 		this.gameBoard=gameBoard;
 		moveValidator=new MoveValidator(gameBoard);

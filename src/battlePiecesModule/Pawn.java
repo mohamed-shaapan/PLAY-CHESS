@@ -1,6 +1,6 @@
 package battlePiecesModule;
 
-import gameSetModule.ChessBoardSet;
+import gameSetModule.ChessGame;
 import validLocationModule.PawnValidLocations;
 
 public class Pawn extends Piece{
@@ -8,7 +8,7 @@ public class Pawn extends Piece{
 	//01_Constructor**********************
 	//*************************************************************************
 
-	public Pawn(ChessBoardSet gameBoard, String displayName, String type, String team, String enemy, int step,
+	public Pawn(ChessGame gameBoard, String displayName, String type, String team, String enemy, int step,
 			boolean active, int initialRow, int initialColumn, int currentRow, int currentColumn) {
 		super(gameBoard, displayName, type, team, enemy, step, active, initialRow, initialColumn, currentRow, currentColumn);
 		//valid locations object

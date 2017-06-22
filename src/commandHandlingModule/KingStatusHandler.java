@@ -3,14 +3,14 @@ package commandHandlingModule;
 import java.util.ArrayList;
 
 import battlePiecesModule.Piece;
-import gameSetModule.ChessBoardSet;
+import gameSetModule.ChessGame;
 
 public class KingStatusHandler {
 	
 	
 
 	//*************************************************************************
-	public static boolean isKingInDanger(ChessBoardSet gameBoard, Piece king){
+	public static boolean isKingInDanger(ChessGame gameBoard, Piece king){
 		boolean verticalTest=isVerticalDnagerous(gameBoard, king);
 		boolean horizontalTest=isHorizotalDnagerous(gameBoard, king);
 		boolean diagonalATest=isDiagonalADangerous(gameBoard, king);
@@ -25,7 +25,7 @@ public class KingStatusHandler {
 	
 	//01_Test Vertical Dangerous
 	//**********************************************************************************
-	private static boolean isVerticalDnagerous(ChessBoardSet gameBoard, Piece king){
+	private static boolean isVerticalDnagerous(ChessGame gameBoard, Piece king){
 		boolean upTest=isUpDangerous(gameBoard, king);
 		boolean downTest=isDownDangerous(gameBoard, king);
 		if(upTest||downTest){
@@ -34,7 +34,7 @@ public class KingStatusHandler {
 		return false;
 	}
 	
-	private static boolean isUpDangerous(ChessBoardSet gameBoard, Piece king){
+	private static boolean isUpDangerous(ChessGame gameBoard, Piece king){
 		int currentRow=king.getCurrentRow(); int currentColumn=king.getCurrentColumn();
 		for(int i=1; i<=7; i++){
 			currentRow--;
@@ -57,7 +57,7 @@ public class KingStatusHandler {
 		return false;
 	}
 	
-	private static boolean isDownDangerous(ChessBoardSet gameBoard, Piece king){
+	private static boolean isDownDangerous(ChessGame gameBoard, Piece king){
 		int currentRow=king.getCurrentRow(); int currentColumn=king.getCurrentColumn();
 		for(int i=1; i<=7; i++){
 			currentRow++;
@@ -82,7 +82,7 @@ public class KingStatusHandler {
 	
 	//02_Test Horizontal Dangerous
 	//**********************************************************************************
-	private static boolean isHorizotalDnagerous(ChessBoardSet gameBoard, Piece king){
+	private static boolean isHorizotalDnagerous(ChessGame gameBoard, Piece king){
 		boolean leftTest=isLeftDangerous(gameBoard, king);
 		boolean rightTest=isRightDangerous(gameBoard, king);
 		if(leftTest||rightTest){
@@ -91,7 +91,7 @@ public class KingStatusHandler {
 		return false;
 	}
 	
-	private static boolean isLeftDangerous(ChessBoardSet gameBoard, Piece king){
+	private static boolean isLeftDangerous(ChessGame gameBoard, Piece king){
 		int currentRow=king.getCurrentRow(); int currentColumn=king.getCurrentColumn();
 		for(int i=1; i<=7; i++){
 			currentColumn--;
@@ -114,7 +114,7 @@ public class KingStatusHandler {
 		return false;
 	}
 	
-	private static boolean isRightDangerous(ChessBoardSet gameBoard, Piece king){
+	private static boolean isRightDangerous(ChessGame gameBoard, Piece king){
 		int currentRow=king.getCurrentRow(); int currentColumn=king.getCurrentColumn();
 		for(int i=1; i<=7; i++){
 			currentColumn++;
@@ -140,7 +140,7 @@ public class KingStatusHandler {
 	
 	//03_Test DiagonalA Dangerous
 	//**********************************************************************************
-	private static boolean isDiagonalADangerous(ChessBoardSet gameBoard, Piece king){
+	private static boolean isDiagonalADangerous(ChessGame gameBoard, Piece king){
 		boolean d1Test=isD1Dangerous(gameBoard, king);
 		boolean d2Test=isD2Dangerous(gameBoard, king);
 		if(d1Test||d2Test){
@@ -149,7 +149,7 @@ public class KingStatusHandler {
 		return false;
 	}
 	
-	private static boolean isD1Dangerous(ChessBoardSet gameBoard, Piece king){
+	private static boolean isD1Dangerous(ChessGame gameBoard, Piece king){
 		int currentRow=king.getCurrentRow(); int currentColumn=king.getCurrentColumn();
 		for(int i=1; i<=7; i++){
 			currentRow--;
@@ -173,7 +173,7 @@ public class KingStatusHandler {
 		return false;
 	}
 	
-	private static boolean isD2Dangerous(ChessBoardSet gameBoard, Piece king){
+	private static boolean isD2Dangerous(ChessGame gameBoard, Piece king){
 		int currentRow=king.getCurrentRow(); int currentColumn=king.getCurrentColumn();
 		for(int i=1; i<=7; i++){
 			currentRow++;
@@ -199,7 +199,7 @@ public class KingStatusHandler {
 	
 	//04_Test DiagonalB Dangerous
 	//**********************************************************************************
-	private static boolean isDiagonalBDangerous(ChessBoardSet gameBoard, Piece king){
+	private static boolean isDiagonalBDangerous(ChessGame gameBoard, Piece king){
 		boolean d3Test=isD3Dangerous(gameBoard, king);
 		boolean d4Test=isD4Dangerous(gameBoard, king);
 		if(d3Test||d4Test){
@@ -208,7 +208,7 @@ public class KingStatusHandler {
 		return false;
 	}
 	
-	private static boolean isD3Dangerous(ChessBoardSet gameBoard, Piece king){
+	private static boolean isD3Dangerous(ChessGame gameBoard, Piece king){
 		int currentRow=king.getCurrentRow(); int currentColumn=king.getCurrentColumn();
 		for(int i=1; i<=7; i++){
 			currentRow--;
@@ -232,7 +232,7 @@ public class KingStatusHandler {
 		return false;
 	}
 	
-	private static boolean isD4Dangerous(ChessBoardSet gameBoard, Piece king){
+	private static boolean isD4Dangerous(ChessGame gameBoard, Piece king){
 		int currentRow=king.getCurrentRow(); int currentColumn=king.getCurrentColumn();
 		for(int i=1; i<=7; i++){
 			currentRow++;
@@ -258,7 +258,7 @@ public class KingStatusHandler {
 	
 	//05_Test Knight Dangerous
 	//**********************************************************************************
-	private static boolean isKnightDangerous(ChessBoardSet gameBoard, Piece king){
+	private static boolean isKnightDangerous(ChessGame gameBoard, Piece king){
 		int kingRow=king.getCurrentRow(); int kingCol=king.getCurrentColumn();
 		boolean knight1=isKnightDangerousGeneric(gameBoard, king, kingRow-2, kingCol+1);
 		boolean knight2=isKnightDangerousGeneric(gameBoard, king, kingRow-1, kingCol+2);
@@ -274,7 +274,7 @@ public class KingStatusHandler {
 		return false;
 	}
 	
-	private static boolean isKnightDangerousGeneric(ChessBoardSet gameBoard, Piece king, int knightRow, int knightCol){
+	private static boolean isKnightDangerousGeneric(ChessGame gameBoard, Piece king, int knightRow, int knightCol){
 		try{
 			Piece currentCell=gameBoard.getGameBoard()[knightRow][knightCol];
 			if(currentCell.getTeam().equalsIgnoreCase(king.getEnemy())){

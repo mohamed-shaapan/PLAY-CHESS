@@ -3,7 +3,7 @@ package validLocationModule;
 import java.util.ArrayList;
 
 import battlePiecesModule.Piece;
-import gameSetModule.ChessBoardSet;
+import gameSetModule.ChessGame;
 
 public class PawnValidLocations implements ValidLocations{
 
@@ -11,14 +11,14 @@ public class PawnValidLocations implements ValidLocations{
 	//*************************************************************************
 	private ArrayList<int[]> nextValidLocations;
 	private Piece piece;
-	private ChessBoardSet gameSet;
+	private ChessGame gameSet;
 	private int currentRow; private int currentCol;
 	private LocationGenerator locationGenerator;
 	
 	
 	//02_Constructor**********************
 	//*************************************************************************
-	public PawnValidLocations(Piece piece, ChessBoardSet gameSet) {
+	public PawnValidLocations(Piece piece, ChessGame gameSet) {
 		this.piece=piece;
 		this.gameSet=gameSet;
 		nextValidLocations=new ArrayList<int[]>();

@@ -2,18 +2,18 @@ package validLocationModule;
 
 import java.util.ArrayList;
 
-import gameSetModule.ChessBoardSet;
+import gameSetModule.ChessGame;
 
 public class LocationGenerator {
 	
 	
 	//01_ATTRIBUTES
 	//**************************************************************
-	private ChessBoardSet gameSet;
+	private ChessGame gameSet;
 	
 	//02_CONSTRUCTOR
 	//**************************************************************
-	public LocationGenerator(ChessBoardSet gameSet) {
+	public LocationGenerator(ChessGame gameSet) {
 		this.gameSet=gameSet;
 	}
 	

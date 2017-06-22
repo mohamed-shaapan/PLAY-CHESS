@@ -1,11 +1,11 @@
 package validLocationModule;
 
-import gameSetModule.ChessBoardSet;
+import gameSetModule.ChessGame;
 
 public class FreeRouteExaminer {
 	
 	//****************************************************
-	public static boolean freeVerticalRoute(ChessBoardSet gameBoard, int fromRow, int fromCol, int toRow, int toCol){
+	public static boolean freeVerticalRoute(ChessGame gameBoard, int fromRow, int fromCol, int toRow, int toCol){
 		if(toRow<fromRow){
 			int tmp=toRow; toRow=fromRow; fromRow=tmp;
 		}
@@ -24,7 +24,7 @@ public class FreeRouteExaminer {
 	}
 	
 	//****************************************************
-	public static boolean freeHorizontalRoute(ChessBoardSet gameBoard, int fromRow, int fromCol, int toRow, int toCol){
+	public static boolean freeHorizontalRoute(ChessGame gameBoard, int fromRow, int fromCol, int toRow, int toCol){
 		if(toCol<fromCol){
 			int tmp=toCol; toCol=fromCol; fromCol=tmp;
 		}
@@ -42,7 +42,7 @@ public class FreeRouteExaminer {
 	}
 	
 	//****************************************************
-	public static boolean freeFirstDiagonal(ChessBoardSet gameBoard, int fromRow, int fromCol, int toRow, int toCol){
+	public static boolean freeFirstDiagonal(ChessGame gameBoard, int fromRow, int fromCol, int toRow, int toCol){
 		if(toCol<fromCol){
 			int tmp=toCol; toCol=fromCol; fromCol=tmp;
 			int tmp2=toRow; toRow=fromRow; fromRow=tmp2;
@@ -63,7 +63,7 @@ public class FreeRouteExaminer {
 	}
 	
 	//****************************************************
-	public static boolean freeSecondDiagonal(ChessBoardSet gameSet, int fromRow, int fromCol, int toRow, int toCol){
+	public static boolean freeSecondDiagonal(ChessGame gameSet, int fromRow, int fromCol, int toRow, int toCol){
 		if(toCol<fromCol){
 			int tmp=toCol; toCol=fromCol; fromCol=tmp;
 			int tmp2=toRow; toRow=fromRow; fromRow=tmp2;
