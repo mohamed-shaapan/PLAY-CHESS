@@ -2,12 +2,14 @@ package zz_ProprietaryGuiElements;
 
 import java.util.HashMap;
 
+import gameEngineModule.ChessGame;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 
 public class Elements {
 
+	
 	//01_ELEMENTS
 	//**************************************************
 	final int cellSize=65;
@@ -17,6 +19,7 @@ public class Elements {
 	private ImageView boardPieces[][];
 	private HashMap<Rectangle, Integer[]> boardCells;
 	private GridPane overallBoardShape;
+	private ChessGame gameEngine;
 	
 	//02_CONSTRUCTOR
 	//**************************************************
@@ -27,6 +30,7 @@ public class Elements {
 		blackBlocks=new Rectangle[32];
 		innerBoard=new GridPane();
 		overallBoardShape=new GridPane();
+		gameEngine=new ChessGame();
 	}
 
 	
@@ -58,6 +62,10 @@ public class Elements {
 
 	public GridPane getOverallBoardShape() {
 		return overallBoardShape;
+	}
+
+	public ChessGame getGameEngine() {
+		return gameEngine;
 	}
 	
 	

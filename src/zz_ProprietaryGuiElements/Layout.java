@@ -70,7 +70,6 @@ public class Layout {
 				for(int col=1; col<=8; col++){
 					if(col%2==0){
 						boardElements.getInnerBoard().add(boardElements.getWhiteBlocks()[pointer1-1], row-1, col-1);
-						//boardCells[row-1][col-1]=whiteBlocks[pointer1-1];
 						boardElements.getBoardCells().put(boardElements.getWhiteBlocks()[pointer1-1], new Integer[]{row-1, col-1});
 						pointer1++;
 					}else{

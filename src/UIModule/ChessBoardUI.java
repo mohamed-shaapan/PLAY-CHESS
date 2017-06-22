@@ -1,4 +1,4 @@
-package zz_ProprietaryGuiElements;
+package UIModule;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

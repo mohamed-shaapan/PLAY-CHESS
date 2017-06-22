@@ -10,7 +10,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import zz_ProprietaryGuiElements.ChessBoardUI;
 
 public class ElementGenerator {
 

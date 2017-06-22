@@ -70,9 +70,9 @@ public class ChessGame implements IChessGame{
 			//change player turn
 			playerTurn=gameBoard[toRow][toCol].getEnemy();
 			//update game status
-			gameStatusHandler.updateGameStatus(playerTurn);	
+			gameStatusHandler.updateGameStatus(playerTurn);
+			return true;
 		}
-		
 		return false;
 	}
 	@Override

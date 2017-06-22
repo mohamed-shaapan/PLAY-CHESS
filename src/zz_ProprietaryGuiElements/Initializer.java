@@ -4,24 +4,30 @@ import java.io.FileNotFoundException;
 
 public class Initializer {
 	
+	
+	//01_ATTRIBUTES
+	//********************************************************
 	private Elements elementsGenerator;
 	private Layout layoutGenerator;
-	//private ActionListeners actionListernsGenerator;
+	private ActionListeners actionListernsGenerator;
 	private MainBoard chessBoard;
 	
-	
+	//02_CONSTRUCTOR
+	//********************************************************
 	public Initializer(MainBoard chessBoard) {
 		elementsGenerator=new Elements();
 		layoutGenerator=new Layout(elementsGenerator);
-		//actionListernsGenerator=new ActionListeners();
+		actionListernsGenerator=new ActionListeners(elementsGenerator);
 		this.chessBoard=chessBoard;
 	}
 	
-	
+	//03_INTERFACE METHODS
+	//********************************************************
 	public void initialize() throws FileNotFoundException{
 		elementsGenerator.initializeBoardElements();
 		layoutGenerator.generateLayout();
 		chessBoard.setLayout(elementsGenerator.getOverallBoardShape());
+		actionListernsGenerator.generateActionListeners();
 		
 		
 	}
