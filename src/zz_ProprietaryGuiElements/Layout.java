@@ -199,14 +199,14 @@ public class Layout {
 		}
 
 		//column names
-		boardElements.getOverallBoardShape().add(new Label("1"), 0, 1); boardElements.getOverallBoardShape().add(new Label("1"), 9, 1);
-		boardElements.getOverallBoardShape().add(new Label("2"), 0, 2); boardElements.getOverallBoardShape().add(new Label("2"), 9, 2);
-		boardElements.getOverallBoardShape().add(new Label("3"), 0, 3); boardElements.getOverallBoardShape().add(new Label("3"), 9, 3);
-		boardElements.getOverallBoardShape().add(new Label("4"), 0, 4); boardElements.getOverallBoardShape().add(new Label("4"), 9, 4);
-		boardElements.getOverallBoardShape().add(new Label("5"), 0, 5); boardElements.getOverallBoardShape().add(new Label("5"), 9, 5);
-		boardElements.getOverallBoardShape().add(new Label("6"), 0, 6); boardElements.getOverallBoardShape().add(new Label("6"), 9, 6);
-		boardElements.getOverallBoardShape().add(new Label("7"), 0, 7); boardElements.getOverallBoardShape().add(new Label("7"), 9, 7);
-		boardElements.getOverallBoardShape().add(new Label("8"), 0, 8); boardElements.getOverallBoardShape().add(new Label("8"), 9, 8);
+		boardElements.getOverallBoardShape().add(new Label("8"), 0, 1); boardElements.getOverallBoardShape().add(new Label("8"), 9, 1);
+		boardElements.getOverallBoardShape().add(new Label("7"), 0, 2); boardElements.getOverallBoardShape().add(new Label("7"), 9, 2);
+		boardElements.getOverallBoardShape().add(new Label("6"), 0, 3); boardElements.getOverallBoardShape().add(new Label("6"), 9, 3);
+		boardElements.getOverallBoardShape().add(new Label("5"), 0, 4); boardElements.getOverallBoardShape().add(new Label("5"), 9, 4);
+		boardElements.getOverallBoardShape().add(new Label("4"), 0, 5); boardElements.getOverallBoardShape().add(new Label("4"), 9, 5);
+		boardElements.getOverallBoardShape().add(new Label("3"), 0, 6); boardElements.getOverallBoardShape().add(new Label("3"), 9, 6);
+		boardElements.getOverallBoardShape().add(new Label("2"), 0, 7); boardElements.getOverallBoardShape().add(new Label("2"), 9, 7);
+		boardElements.getOverallBoardShape().add(new Label("1"), 0, 8); boardElements.getOverallBoardShape().add(new Label("1"), 9, 8);
 		for(int index=16; index<boardElements.getOverallBoardShape().getChildren().size(); index++){
 			Node tmp=boardElements.getOverallBoardShape().getChildren().get(index);
 			Label label=(Label)tmp;

@@ -66,21 +66,25 @@ public class ActionListeners {
 	
 	//**************************************************
 	private void setPieceEvents(ImageView piece){
+		
 		piece.setOnMouseClicked(e ->{
-			moveFromRow=currentRow;
-			moveFromCol=currentCol;
+			
 			if(selectedPiece==null){
+				moveFromRow=currentRow;
+				moveFromCol=currentCol;
 				piece.setOpacity(0.5);
 				selectedPiece=piece;
-			}else{
+			}else if(selectedPiece.equals(piece)){
 				selectedPiece.setOpacity(1);
-				if(selectedPiece.equals(piece)){
-					selectedPiece=null;
-				}else{
-					piece.setOpacity(0.5);
-					selectedPiece=piece;
+				selectedPiece=null;
+			}else if(selectedPiece!=null){
+				boolean validMove=boardElements.getGameEngine().movePiece(moveFromRow, moveFromCol, currentRow, currentCol);
+				if(validMove==true){
+					applyMove(moveFromRow, moveFromCol, currentRow, currentCol);
 				}
+				
 			}
+
 		});
 	}
 	
