@@ -3,7 +3,7 @@ package commandHandlingModule;
 import java.util.ArrayList;
 
 import battlePiecesModule.Piece;
-import gameSetModule.ChessGame;
+import gameEngineModule.ChessGame;
 
 public class KingStatusHandler {
 	

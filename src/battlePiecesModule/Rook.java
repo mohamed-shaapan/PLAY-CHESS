@@ -1,7 +1,7 @@
 package battlePiecesModule;
 
-import gameSetModule.ChessGame;
-import validLocationModule.RookValidLocations;
+import gameEngineModule.ChessGame;
+import validLocationGeneratorModule.RookValidLocations;
 
 public class Rook extends Piece{
 	

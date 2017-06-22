@@ -1,7 +1,7 @@
 package battlePiecesModule;
 
-import gameSetModule.ChessGame;
-import validLocationModule.PawnValidLocations;
+import gameEngineModule.ChessGame;
+import validLocationGeneratorModule.PawnValidLocations;
 
 public class Pawn extends Piece{
 

@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import gameSetModule.ChessGame;
+import gameEngineModule.ChessGame;
 
 public class BinaryFormatHandler{
 

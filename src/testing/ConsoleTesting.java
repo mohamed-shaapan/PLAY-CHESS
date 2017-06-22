@@ -1,7 +1,7 @@
 package testing;
 
-import commons.BoardPrinter;
-import gameSetModule.ChessGame;
+import commonsModule.BoardPrinter;
+import gameEngineModule.ChessGame;
 
 public class ConsoleTesting {
 

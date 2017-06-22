@@ -1,7 +1,7 @@
 package battlePiecesModule;
 
-import gameSetModule.ChessGame;
-import validLocationModule.KingValidLocations;
+import gameEngineModule.ChessGame;
+import validLocationGeneratorModule.KingValidLocations;
 
 public class King extends Piece{
 	

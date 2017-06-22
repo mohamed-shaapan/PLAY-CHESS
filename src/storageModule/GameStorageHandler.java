@@ -1,6 +1,6 @@
 package storageModule;
 
-import gameSetModule.ChessGame;
+import gameEngineModule.ChessGame;
 
 public interface GameStorageHandler {
 

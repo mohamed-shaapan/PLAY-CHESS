@@ -2,8 +2,8 @@ package battlePiecesModule;
 
 import java.util.ArrayList;
 
-import gameSetModule.ChessGame;
-import validLocationModule.ValidLocations;
+import gameEngineModule.ChessGame;
+import validLocationGeneratorModule.ValidLocations;
 
 public abstract class Piece {
 

@@ -1,7 +1,7 @@
 package battlePiecesModule;
 
-import gameSetModule.ChessGame;
-import validLocationModule.BishopValidLocations;
+import gameEngineModule.ChessGame;
+import validLocationGeneratorModule.BishopValidLocations;
 
 public class Bishop extends Piece{
 	

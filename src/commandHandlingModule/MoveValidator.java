@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import battlePiecesModule.BlankPiece;
 import battlePiecesModule.Piece;
-import gameSetModule.ChessGame;
+import gameEngineModule.ChessGame;
 
 public class MoveValidator {
 	

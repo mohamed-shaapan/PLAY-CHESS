@@ -1,7 +1,7 @@
 package battlePiecesModule;
 
-import gameSetModule.ChessGame;
-import validLocationModule.KnightValidLocations;
+import gameEngineModule.ChessGame;
+import validLocationGeneratorModule.KnightValidLocations;
 
 public class Knight extends Piece{
 	
