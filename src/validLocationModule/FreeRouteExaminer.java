@@ -2,7 +2,7 @@ package validLocationModule;
 
 import gameSetModule.ChessBoardSet;
 
-public class FreeRouteTester {
+public class FreeRouteExaminer {
 	
 	//****************************************************
 	public static boolean freeVerticalRoute(ChessBoardSet gameBoard, int fromRow, int fromCol, int toRow, int toCol){
@@ -42,12 +42,12 @@ public class FreeRouteTester {
 	}
 	
 	//****************************************************
-	public static boolean freeDiagonalARoute(ChessBoardSet gameBoard, int fromRow, int fromCol, int toRow, int toCol){
+	public static boolean freeFirstDiagonal(ChessBoardSet gameBoard, int fromRow, int fromCol, int toRow, int toCol){
 		if(toCol<fromCol){
 			int tmp=toCol; toCol=fromCol; fromCol=tmp;
 			int tmp2=toRow; toRow=fromRow; fromRow=tmp2;
 		}
-		//assuming piece moving 10 o'clock
+		//assuming piece moving 2 o'clock
 		try{
 			int row=fromRow-1;
 			for(int col=fromCol+1; col<=toCol-1; col++){
@@ -63,7 +63,7 @@ public class FreeRouteTester {
 	}
 	
 	//****************************************************
-	public static boolean freeDiagonalBRoute(ChessBoardSet gameBoard, int fromRow, int fromCol, int toRow, int toCol){
+	public static boolean freeSecondDiagonal(ChessBoardSet gameSet, int fromRow, int fromCol, int toRow, int toCol){
 		if(toCol<fromCol){
 			int tmp=toCol; toCol=fromCol; fromCol=tmp;
 			int tmp2=toRow; toRow=fromRow; fromRow=tmp2;
@@ -72,7 +72,8 @@ public class FreeRouteTester {
 		try{
 			int row=fromRow+1;
 			for(int col=fromCol+1; col<=toCol-1; col++){
-				if(!(gameBoard.getGameBoard()[row][col].getType().equalsIgnoreCase("blank"))){
+				//System.out.println(gameSet.getGameBoard()[row][col].getTeam());
+				if(!(gameSet.getGameBoard()[row][col].getType().equalsIgnoreCase("blank"))){
 					return false;
 				}
 				row++;

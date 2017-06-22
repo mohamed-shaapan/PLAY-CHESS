@@ -32,94 +32,42 @@ public class KnightValidLocations implements ValidLocations{
 		nextValidLocations.clear();
 		currentRow=piece.getCurrentRow(); 
 		currentCol=piece.getCurrentColumn();
-		setupLocationA(); setupLocationB();
-		setupLocationC(); setupLocationD();
-		setupLocationE(); setupLocationF();
-		setupLocationG(); setupLocationH();
+		
+		
+		generateKnightSingleCell(currentRow-2, currentCol+1);
+		generateKnightSingleCell(currentRow-2, currentCol-1);
+		
+		generateKnightSingleCell(currentRow+2, currentCol+1);
+		generateKnightSingleCell(currentRow+2, currentCol-1);
+		
+		generateKnightSingleCell(currentRow-1, currentCol+2);
+		generateKnightSingleCell(currentRow-1, currentCol-2);
+		
+		generateKnightSingleCell(currentRow+1, currentCol+2);
+		generateKnightSingleCell(currentRow+1, currentCol-2);
+		
+		//System.out.printf("CurROW(%s), CurCOL(%s)\n", currentRow, currentCol);
+		//GenericPrinter.printValidLocations(nextValidLocations);
+		
 		return nextValidLocations;
 	}
 
-	//01_setup directional moves
-	//*********************************************************
-	private void setupLocationA(){
-		int row=currentRow-2; int col=currentCol+1;
+		
+	//***********************************************************
+	private void generateKnightSingleCell(int row, int col){
 		try{
 			boolean withinBoardLimits=(col>=0)&&(col<=7)&&(row>=0)&&(row<=7);
 			boolean noTeamMate=!(gameBoard.getGameBoard()[row][col].getTeam().equalsIgnoreCase(piece.getTeam()));
+			//System.out.printf("Limits(%s), Mate(%s)\n", withinBoardLimits, noTeamMate);
 			if(withinBoardLimits&&noTeamMate){
 				nextValidLocations.add(new int[]{row, col});
 			}
 		}catch(Exception ex){}
 	}
-	private void setupLocationB(){
-		int row=currentRow-1; int col=currentCol+2;
-		try{
-			boolean withinBoardLimits=(col>=0)&&(col<=7)&&(row>=0)&&(row<=7);
-			boolean noTeamMate=!(gameBoard.getGameBoard()[row][col].getTeam().equalsIgnoreCase(piece.getTeam()));
-			if(withinBoardLimits&&noTeamMate){
-				nextValidLocations.add(new int[]{row, col});
-			}
-		}catch(Exception ex){}
-	}
-	private void setupLocationC(){
-		int row=currentRow+1; int col=currentCol+2;
-		try{
-			boolean withinBoardLimits=(col>=0)&&(col<=7)&&(row>=0)&&(row<=7);
-			boolean noTeamMate=!(gameBoard.getGameBoard()[row][col].getTeam().equalsIgnoreCase(piece.getTeam()));
-			if(withinBoardLimits&&noTeamMate){
-				nextValidLocations.add(new int[]{row, col});
-			}
-		}catch(Exception ex){}
-	}
-	private void setupLocationD(){
-		int row=currentRow+2; int col=currentCol+1;
-		try{
-			boolean withinBoardLimits=(col>=0)&&(col<=7)&&(row>=0)&&(row<=7);
-			boolean noTeamMate=!(gameBoard.getGameBoard()[row][col].getTeam().equalsIgnoreCase(piece.getTeam()));
-			if(withinBoardLimits&&noTeamMate){
-				nextValidLocations.add(new int[]{row, col});
-			}
-		}catch(Exception ex){}
-	}
-	private void setupLocationE(){
-		int row=currentRow+2; int col=currentCol-1;
-		try{
-			boolean withinBoardLimits=(col>=0)&&(col<=7)&&(row>=0)&&(row<=7);
-			boolean noTeamMate=!(gameBoard.getGameBoard()[row][col].getTeam().equalsIgnoreCase(piece.getTeam()));
-			if(withinBoardLimits&&noTeamMate){
-				nextValidLocations.add(new int[]{row, col});
-			}
-		}catch(Exception ex){}
-	}
-	private void setupLocationF(){
-		int row=currentRow+1; int col=currentCol-2;
-		try{
-			boolean withinBoardLimits=(col>=0)&&(col<=7)&&(row>=0)&&(row<=7);
-			boolean noTeamMate=!(gameBoard.getGameBoard()[row][col].getTeam().equalsIgnoreCase(piece.getTeam()));
-			if(withinBoardLimits&&noTeamMate){
-				nextValidLocations.add(new int[]{row, col});
-			}
-		}catch(Exception ex){}
-	}
-	private void setupLocationG(){
-		int row=currentRow-1; int col=currentCol-2;
-		try{
-			boolean withinBoardLimits=(col>=0)&&(col<=7)&&(row>=0)&&(row<=7);
-			boolean noTeamMate=!(gameBoard.getGameBoard()[row][col].getTeam().equalsIgnoreCase(piece.getTeam()));
-			if(withinBoardLimits&&noTeamMate){
-				nextValidLocations.add(new int[]{row, col});
-			}
-		}catch(Exception ex){}
-	}
-	private void setupLocationH(){
-		int row=currentRow-2; int col=currentCol-1;
-		try{
-			boolean withinBoardLimits=(col>=0)&&(col<=7)&&(row>=0)&&(row<=7);
-			boolean noTeamMate=!(gameBoard.getGameBoard()[row][col].getTeam().equalsIgnoreCase(piece.getTeam()));
-			if(withinBoardLimits&&noTeamMate){
-				nextValidLocations.add(new int[]{row, col});
-			}
-		}catch(Exception ex){}
-	}
+	
+	
+	
+	
+	
 	
 }

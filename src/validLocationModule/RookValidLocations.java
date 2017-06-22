@@ -11,17 +11,17 @@ public class RookValidLocations implements ValidLocations{
 	//*************************************************************************
 	private ArrayList<int[]> nextValidLocations;
 	private Piece piece;
-	private ChessBoardSet gameBoard;
 	private int currentRow; private int currentCol;
+	private LocationGenerator locationGenerator;
 	
 	
 	//02_Constructor**********************
 	//*************************************************************************
-	public RookValidLocations(Piece piece, ChessBoardSet gameBoard) {
+	public RookValidLocations(Piece piece, ChessBoardSet gameSet) {
 		this.piece=piece;
-		this.gameBoard=gameBoard;
 		nextValidLocations=new ArrayList<int[]>();
 		currentRow=-1; currentCol=-1;
+		locationGenerator=new LocationGenerator(gameSet);
 	}
 	
 	
@@ -32,45 +32,25 @@ public class RookValidLocations implements ValidLocations{
 		nextValidLocations.clear();
 		currentRow=piece.getCurrentRow(); 
 		currentCol=piece.getCurrentColumn();
-		setupVerticalMoves();
-		setupHorizontalMoves();
+		generateVerticalMoves();
+		generateHorizontalMoves();
+		
+		//System.out.printf("CurROW(%s), CurCOL(%s)\n", currentRow, currentCol);
+		//GenericPrinter.printValidLocations(nextValidLocations);
+		
 		return nextValidLocations;
 	}
 
 	//01_setup directional moves
 	//*********************************************************
-	private void setupVerticalMoves(){
-		int row=currentRow-8;
-		int col=currentCol;
-		for(int i=1; i<=14; i++){
-			try{
-				row=row+i;
-				boolean freeRoute=FreeRouteTester.freeVerticalRoute(gameBoard, currentRow, currentCol, row, col);
-				boolean withinBoardLimits=(col>=0)&&(col<=7)&&(row>=0)&&(row<=7);
-				boolean noTeamMate=!(gameBoard.getGameBoard()[row][col].getTeam().equalsIgnoreCase(piece.getTeam()));
-				boolean differentCell=(piece.getCurrentRow()!=row);
-				if(freeRoute&&withinBoardLimits&&noTeamMate&&differentCell){
-					nextValidLocations.add(new int[]{row, col});
-				}
-			}catch(Exception ex){}
-		}
+	private void generateVerticalMoves(){
+		nextValidLocations.addAll(locationGenerator.generateUpMoves(currentRow, currentCol, piece.getTeam(), 7));
+		nextValidLocations.addAll(locationGenerator.generateDownMoves(currentRow, currentCol, piece.getTeam(), 7));
 	}
 	
-	private void setupHorizontalMoves(){
-		int row=currentRow;
-		int col=currentCol-8;
-		for(int i=1; i<=14; i++){
-			try{
-				col=col+i;
-				boolean freeRoute=FreeRouteTester.freeVerticalRoute(gameBoard, currentRow, currentCol, row, col);
-				boolean withinBoardLimits=(col>=0)&&(col<=7)&&(row>=0)&&(row<=7);
-				boolean noTeamMate=!(gameBoard.getGameBoard()[row][col].getTeam().equalsIgnoreCase(piece.getTeam()));
-				boolean differentCell=(piece.getCurrentColumn()!=col);
-				if(freeRoute&&withinBoardLimits&&noTeamMate&&differentCell){
-					nextValidLocations.add(new int[]{row, col});
-				}
-			}catch(Exception ex){}
-		}
+	private void generateHorizontalMoves(){
+		nextValidLocations.addAll(locationGenerator.generateLeftMoves(currentRow, currentCol, piece.getTeam(), 7));
+		nextValidLocations.addAll(locationGenerator.generateRightMoves(currentRow, currentCol, piece.getTeam(), 7));
 	}
 
 

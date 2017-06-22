@@ -8,7 +8,7 @@ public class MovePieceCommand {
 	
 	//01_ATTRIBUTES
 	//*************************************************************************
-	private ChessBoardSet chessBoard;
+	private ChessBoardSet gameSet;
 	private int fromRow; private int fromCol;
 	private int toRow; private int toCol;
 	
@@ -16,7 +16,7 @@ public class MovePieceCommand {
 	//02_CONSTRUCTOR
 	//*************************************************************************
 	public MovePieceCommand(ChessBoardSet chessBoard, int fromRow, int fromCol, int toRow, int toCol){
-		this.chessBoard=chessBoard;
+		this.gameSet=chessBoard;
 		this.fromRow=fromRow;
 		this.fromCol=fromCol;
 		this.toRow=toRow;
@@ -27,17 +27,21 @@ public class MovePieceCommand {
 	//03_INTERFACE METHODS
 	//*************************************************************************
 	public void execute(){
+		//make old location blank
+		Piece pieceToMove=gameSet.getGameBoard()[fromRow][fromCol];
+		gameSet.getGameBoard()[fromRow][fromCol]=new BlankPiece();
+		
 		//kill target enemy (if exists)
-		String enemy=chessBoard.getGameBoard()[fromRow][fromCol].getEnemy();
-		String targetCellTeam=chessBoard.getGameBoard()[toRow][toCol].getTeam();
+		String enemy=gameSet.getGameBoard()[fromRow][fromCol].getEnemy();
+		String targetCellTeam=gameSet.getGameBoard()[toRow][toCol].getTeam();
 		if(targetCellTeam.equalsIgnoreCase(enemy)){
-			chessBoard.getGameBoard()[fromRow][fromCol].setActive(false);
+			gameSet.getGameBoard()[fromRow][fromCol].setActive(false);
 		}
+		
 		//move piece to specified location
-		Piece pieceToMove=chessBoard.getGameBoard()[fromRow][fromCol];
-		chessBoard.getGameBoard()[fromRow][fromCol]=new BlankPiece();
-		chessBoard.getGameBoard()[toRow][toCol]=pieceToMove;
+		gameSet.getGameBoard()[toRow][toCol]=pieceToMove;
 		pieceToMove.setCurrentRow(toRow); pieceToMove.setCurrentColumn(toCol);
+		
 		//examine promotion eligibility
 		//
 		

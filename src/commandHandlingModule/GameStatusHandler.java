@@ -41,6 +41,7 @@ public class GameStatusHandler {
 		if(isCheckMate(kingToTest)){
 			gameOver=true;
 			System.out.println("CHECK MATE! - GAME OVER");
+			System.out.printf("%s Team Wins!", kingToTest.getEnemy());
 		}else if(isStaleMate(kingToTest)){
 			gameOver=true;
 			System.out.println("STALE MATE! - GAME OVER");

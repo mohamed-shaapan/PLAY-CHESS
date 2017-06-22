@@ -11,17 +11,20 @@ public class PawnValidLocations implements ValidLocations{
 	//*************************************************************************
 	private ArrayList<int[]> nextValidLocations;
 	private Piece piece;
-	private ChessBoardSet gameBoard;
+	private ChessBoardSet gameSet;
 	private int currentRow; private int currentCol;
+	private LocationGenerator locationGenerator;
 	
 	
 	//02_Constructor**********************
 	//*************************************************************************
-	public PawnValidLocations(Piece piece, ChessBoardSet gameBoard) {
+	public PawnValidLocations(Piece piece, ChessBoardSet gameSet) {
 		this.piece=piece;
-		this.gameBoard=gameBoard;
+		this.gameSet=gameSet;
 		nextValidLocations=new ArrayList<int[]>();
 		currentRow=-1; currentCol=-1;
+		locationGenerator=new LocationGenerator(gameSet);
+		
 	}
 	
 	
@@ -32,64 +35,71 @@ public class PawnValidLocations implements ValidLocations{
 		nextValidLocations.clear();
 		currentRow=piece.getCurrentRow(); 
 		currentCol=piece.getCurrentColumn();
-		setupVerticalMoves();
-		setupDiagonalAMoves();
-		setupDiagonalBMoves();
+		generateVerticalMoves();
+		generateFirstDiagonalMoves();
+		generateSecondDiagonalMoves();
 		return nextValidLocations;
 	}
 
-	//01_setup directional moves
+	//GENERATE DIRECTIONAL MOVES
+	//*********************************************************	
+	private void generateVerticalMoves(){
+		try{
+			if(piece.getTeam().equalsIgnoreCase("white")){
+				if(currentRow==piece.getInitialRow()){
+					nextValidLocations.addAll(locationGenerator.generateUpMoves(currentRow, currentCol, piece.getTeam(), 2));
+				}else{
+					nextValidLocations.addAll(locationGenerator.generateUpMoves(currentRow, currentCol, piece.getTeam(), 1));
+				}
+			}else{
+				if(currentRow==piece.getInitialRow()){
+					nextValidLocations.addAll(locationGenerator.generateDownMoves(currentRow, currentCol, piece.getTeam(), 2));
+				}else{
+					nextValidLocations.addAll(locationGenerator.generateDownMoves(currentRow, currentCol, piece.getTeam(), 1));
+				}
+			}
+		}catch(Exception ex){}
+	}
+	
+
 	//*********************************************************
-	private void setupVerticalMoves(){
-		int row=currentRow-8;
-		int col=currentCol;
-		for(int i=1; i<=14; i++){
-			try{
-				row=row+i;
-				boolean freeRoute=FreeRouteTester.freeVerticalRoute(gameBoard, currentRow, currentCol, row, col);
-				boolean withinBoardLimits=(col>=0)&&(col<=7)&&(row>=0)&&(row<=7);
-				boolean noTeamMate=!(gameBoard.getGameBoard()[row][col].getTeam().equalsIgnoreCase(piece.getTeam()));
-				boolean differentCell=(piece.getCurrentRow()!=row);
-				if(freeRoute&&withinBoardLimits&&noTeamMate&&differentCell){
-					nextValidLocations.add(new int[]{row, col});
+	private void generateFirstDiagonalMoves(){
+		try{
+			if(piece.getTeam().equalsIgnoreCase("white")){
+				//moving 2 o'clock
+				boolean enemyExists=gameSet.getGameBoard()[currentRow-1][currentCol+1].getTeam().equalsIgnoreCase(piece.getEnemy());
+				if(enemyExists==true){
+					nextValidLocations.addAll(locationGenerator.generateDiagonalMovesA(currentRow, currentCol, piece.getTeam(), 1));
 				}
-			}catch(Exception ex){}
-		}
+			}else{
+				//moving 4 o'clock
+				boolean enemyExists=gameSet.getGameBoard()[currentRow+1][currentCol+1].getTeam().equalsIgnoreCase(piece.getEnemy());
+				if(enemyExists==true){
+					nextValidLocations.addAll(locationGenerator.generateDiagonalMovesB(currentRow, currentCol, piece.getTeam(), 1));
+				}
+			}
+		}catch(Exception ex){}
 	}
 	
-	private void setupDiagonalAMoves(){
-		int row=currentRow+8;
-		int col=currentCol-8;
-		for(int i=1; i<=14; i++){
-			try{
-				row=row-i; col=col+i;
-				boolean freeRoute=FreeRouteTester.freeDiagonalARoute(gameBoard, currentRow, currentCol, row, col);
-				boolean withinBoardLimits=(col>=0)&&(col<=7)&&(row>=0)&&(row<=7);
-				boolean noTeamMate=!(gameBoard.getGameBoard()[row][col].getTeam().equalsIgnoreCase(piece.getTeam()));
-				boolean differentCell=(piece.getCurrentColumn()!=col)&&(piece.getCurrentRow()!=row);
-				if(freeRoute&&withinBoardLimits&&noTeamMate&&differentCell){
-					nextValidLocations.add(new int[]{row, col});
+	//*********************************************************
+	private void generateSecondDiagonalMoves(){
+		try{
+			if(piece.getTeam().equalsIgnoreCase("white")){
+				//moving 10 o'clock
+				boolean enemyExists=gameSet.getGameBoard()[currentRow-1][currentCol-1].getTeam().equalsIgnoreCase(piece.getEnemy());
+				if(enemyExists==true){
+					nextValidLocations.addAll(locationGenerator.generateDiagonalMovesD(currentRow, currentCol, piece.getTeam(), 1));
 				}
-			}catch(Exception ex){}
-		}
-	}
-	
-	private void setupDiagonalBMoves(){
-		int row=currentRow-8;
-		int col=currentCol-8;
-		for(int i=1; i<=14; i++){
-			try{
-				row=row+i; col=col+i;
-				boolean freeRoute=FreeRouteTester.freeDiagonalBRoute(gameBoard, currentRow, currentCol, row, col);
-				boolean withinBoardLimits=(col>=0)&&(col<=7)&&(row>=0)&&(row<=7);
-				boolean noTeamMate=!(gameBoard.getGameBoard()[row][col].getTeam().equalsIgnoreCase(piece.getTeam()));
-				boolean differentCell=(piece.getCurrentColumn()!=col)&&(piece.getCurrentRow()!=row);
-				if(freeRoute&&withinBoardLimits&&noTeamMate&&differentCell){
-					nextValidLocations.add(new int[]{row, col});
+			}else{
+				//moving 8 o'clock
+				boolean enemyExists=gameSet.getGameBoard()[currentRow+1][currentCol-1].getTeam().equalsIgnoreCase(piece.getEnemy());
+				if(enemyExists==true){
+					nextValidLocations.addAll(locationGenerator.generateDiagonalMovesC(currentRow, currentCol, piece.getTeam(), 1));
 				}
-			}catch(Exception ex){}
-		}
+			}
+		}catch(Exception ex){}
 	}
+	//*********************************************************
 
 	
 	
