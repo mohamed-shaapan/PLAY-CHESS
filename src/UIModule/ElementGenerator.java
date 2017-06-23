@@ -10,6 +10,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import proprietaryGuiElements.JChessBoard;
 
 public class ElementGenerator {
 
@@ -48,7 +49,8 @@ public class ElementGenerator {
 	//******************************
 	private BorderPane layout;
 	private Pane canvas;
-	private ChessBoardUI boardUI;
+	//private ChessBoardUI boardUI;
+	private JChessBoard chessBoard;
 	
 	//H_GAME ENGINE
 	//******************************
@@ -94,7 +96,7 @@ public class ElementGenerator {
 		//******************************
 		canvas=new Pane();
 		layout=new BorderPane();
-		boardUI=new ChessBoardUI();
+		chessBoard=new JChessBoard();
 		
 		//H_GAME ENGINE
 		//******************************
@@ -202,8 +204,8 @@ public class ElementGenerator {
 	}
 
 
-	public ChessBoardUI getBoardUI() {
-		return boardUI;
+	public JChessBoard getChessBoard() {
+		return chessBoard;
 	}
 
 

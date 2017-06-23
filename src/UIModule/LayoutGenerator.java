@@ -142,7 +142,7 @@ public class LayoutGenerator {
 		sidePanel.getChildren().addAll(gameStatusBlock, gameplayControlsBlock, killedWhitePieceBlock, killedBlackPieceBlock, appControlBlock);
 		sidePanel.setMinWidth(250);
 		sidePanel.setMaxWidth(250);
-		sidePanel.setStyle("-fx-background-color: #dddddd;");
+		sidePanel.setStyle("-fx-background-color: white;");//#dddddd
 		//*****************************************************
 		//*****************************************************
 		
@@ -151,15 +151,16 @@ public class LayoutGenerator {
 		appElements.getCanvas().setMinSize(600, 400);
 		appElements.getCanvas().setClip(new Rectangle(3000,3000));
 		HBox tmp=new HBox();
-		tmp.setPadding(new Insets(20,100,50,70));
+		tmp.setPadding(new Insets(25,100,50,70));
 		
-		tmp.getChildren().add(appElements.getBoardUI().getBoard());
+		tmp.getChildren().add(appElements.getChessBoard().getDisplayBoard());
+		//tmp.getChildren().add(appElements.getBoardUI().getBoard());
 		appElements.getCanvas().getChildren().add(tmp);
 		appElements.getCanvas().setPadding(new Insets(30,30,30,30));
 		
 		HBox drawingCanvas=new HBox();
 		drawingCanvas.getChildren().add(appElements.getCanvas());
-		drawingCanvas.setStyle("-fx-background-color: white;");
+		drawingCanvas.setStyle("-fx-background-color: #eae7d7;");
 		
 		
 		//*****************************************************

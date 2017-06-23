@@ -1,4 +1,4 @@
-package zz_ProprietaryGuiElements;
+package proprietaryGuiElements;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,16 +13,16 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class Layout {
+public class BoardLayoutGenerator {
 	
 	
 	//01_ATTRIBUTES
 	//********************************************************
-	private Elements boardElements;
+	private BoardElementsGenerator boardElements;
 
 	//02_CONSTRUCTOR
 	//********************************************************
-	public Layout(Elements boardElements) {
+	public BoardLayoutGenerator(BoardElementsGenerator boardElements) {
 		this.boardElements=boardElements;
 	}
 	
