@@ -25,7 +25,7 @@ public class AppInitializer {
 		this.application=application;
 		elements=new ElementGenerator();
 		layout=new LayoutGenerator(elements);
-		actionListeners=new ActionListenersGenerator(elements, layout);
+		actionListeners=new ActionListenersGenerator(elements);
 		//hotKeys=new HotKeysInitializer(elements);
 		
 		

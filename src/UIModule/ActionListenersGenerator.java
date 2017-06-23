@@ -1,7 +1,11 @@
 package UIModule;
 
 import java.io.File;
+import java.util.Optional;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
@@ -29,7 +33,7 @@ public class ActionListenersGenerator {
 	
 	//02_CONSTRUCTOR
 	//*************************************************************
-	public ActionListenersGenerator(ElementGenerator appElements, LayoutGenerator layout){
+	public ActionListenersGenerator(ElementGenerator appElements){
 		this.appElements=appElements;
 	}
 	
@@ -144,7 +148,29 @@ public class ActionListenersGenerator {
 	//START NEW GAME BUTTON********************
 	private void generateNewGameButtonActionListeners(){
 		appElements.getNewGameButton().setOnMouseClicked(e ->{
-			
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("New Image");
+			alert.setHeaderText("Discard Progress & Start New Game?");
+			alert.setContentText("Discard Progress?");
+
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK){
+				try{
+					//game engine
+					appElements.getGameEngine().startNewGame();
+					//reset layout
+					appElements.getChessBoard().resetGameBoard();
+					//set action listeners
+					for(ImageView row[]:boardElements.getBoardPieces()){
+						for(ImageView piece:row){
+							if(piece==null){continue;}
+							generateBoardPieceEvents(piece);
+						}
+					}
+				}catch (Exception ex){}
+			} else {
+			    // ... user chose CANCEL or closed the dialog
+			}
 		});
 	}
 	
@@ -192,7 +218,7 @@ public class ActionListenersGenerator {
 				//title
 				fileChooser.setTitle("Save Image");
 				//default directory
-				//String dir=System.getProperty("user.home");
+				//String directory=System.getProperty("user.home");
 				String dir="resources/saved_games/";
 				fileChooser.setInitialDirectory(new File(dir));
 				//restrict file types
@@ -200,16 +226,10 @@ public class ActionListenersGenerator {
 						new FileChooser.ExtensionFilter("bin", ".bin"),
 						new FileChooser.ExtensionFilter("xml", ".xml")
 				);
-
-			//show dialog & use file
+			//show dialog & save file
 			File chosenFile=fileChooser.showSaveDialog(appElements.getLayout().getScene().getWindow());
-			
 			if(chosenFile!=null){
-				if(getFileExtension(chosenFile).equalsIgnoreCase("bin")){
-					//appEngine.saveImageXML(chosenFile.getPath());
-				}else if(getFileExtension(chosenFile).equalsIgnoreCase("xml")){
-					//appEngine.saveImageJSON(chosenFile.getPath());
-				}
+				appElements.getGameEngine().saveGameProgress(chosenFile);
 	        }
     	});
 	}

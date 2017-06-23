@@ -220,7 +220,19 @@ public class BoardLayoutGenerator {
 		
 	}
 	//*********************************************************
-	
+	protected void resetLayout() throws FileNotFoundException{
+		//remove old pieces
+		for(int row=1; row<=8; row++){
+			for(int col=1; col<=8; col++){
+				ImageView pieceToRemove=boardElements.getBoardPieces()[row-1][col-1];
+				boardElements.getInnerBoard().getChildren().remove(pieceToRemove);
+				boardElements.getBoardPieces()[row-1][col-1]=null;
+			}
+		}
+		//add start layout
+		createWhitePieces();
+		createBlackPieces();
+	}
 	
 	
 }

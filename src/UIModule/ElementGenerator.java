@@ -212,6 +212,10 @@ public class ElementGenerator {
 	public ChessGame getGameEngine() {
 		return gameEngine;
 	}
+	
+	public void resetChessBoard() throws FileNotFoundException{
+		chessBoard=new JChessBoard();
+	}
 
 
 	

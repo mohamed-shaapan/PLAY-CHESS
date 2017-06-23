@@ -1,5 +1,7 @@
 package gameEngineModule;
 
+import java.io.File;
+
 public interface IChessGame {
 	
 	public boolean movePiece(int fromRow, int fromCol, int toRow, int toCol);
@@ -10,7 +12,7 @@ public interface IChessGame {
 	
 	public void startNewGame();
 	
-	public void saveGameProgress(String fileName);
+	public void saveGameProgress(File chosenFile);
 	public void loadSavedGame(String fileName);
 
 }

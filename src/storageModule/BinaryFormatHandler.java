@@ -14,11 +14,10 @@ public class BinaryFormatHandler{
 	
 	//01_SAVE GAME
 	//**************************************************************
-	public boolean saveGame(ChessGame gameSet, String fileDirectory) {
-		File gameProgressFile=new File(fileDirectory);
+	protected static boolean saveGame(ChessGame gameSet, File chosenFile) {
 		try{
 			//open file
-			FileOutputStream tmp=new FileOutputStream(gameProgressFile);
+			FileOutputStream tmp=new FileOutputStream(chosenFile);
 			ObjectOutputStream fileWriter=new ObjectOutputStream(tmp);
 			//write to file
 			fileWriter.writeObject(gameSet);
@@ -27,6 +26,7 @@ public class BinaryFormatHandler{
 			tmp.close();
 			return true;
 		}catch(Exception e){
+			System.out.println("Error creating or opening file");
 			return false;
 		}
 	}
@@ -34,7 +34,7 @@ public class BinaryFormatHandler{
 		
 	//02_LOAD GAME
 	//**************************************************************
-	public ChessGame loadGame(String fileDirectory){
+	protected static ChessGame loadGame(String fileDirectory){
 		File gameProgressFile=new File(fileDirectory);
 		try{
 			//open file
@@ -47,6 +47,7 @@ public class BinaryFormatHandler{
 			tmp.close();
 			return gameSet;
 		}catch (Exception e){
+			System.out.println("Error loading file");
 			return null;
 		}
 	}

@@ -1,5 +1,7 @@
 package gameEngineModule;
 
+import java.io.File;
+
 import battlePiecesModule.BlankPiece;
 import battlePiecesModule.Piece;
 import battleTeamsModule.BlackTeam;
@@ -7,6 +9,7 @@ import battleTeamsModule.WhiteTeam;
 import commandHandlingModule.GameStatusHandler;
 import commandHandlingModule.MovePieceCommand;
 import commandHandlingModule.MoveValidator;
+import storageModule.GameStorageHandler;
 
 public class ChessGame implements IChessGame{
 
@@ -19,6 +22,7 @@ public class ChessGame implements IChessGame{
 	private String gameStatus;
 	private MoveValidator moveValidator;
 	private GameStatusHandler gameStatusHandler;
+	private GameStorageHandler gameStorageHandler;
 		
 		
 	//02_CONSTRUCTOR
@@ -32,6 +36,7 @@ public class ChessGame implements IChessGame{
 		gameStatus="ONGOING";
 		moveValidator=new MoveValidator(this);
 		gameStatusHandler=new GameStatusHandler(this);
+		gameStorageHandler=new GameStorageHandler(this);
 	}
 	//************************************
 	private void initializeBoardCells(){
@@ -93,12 +98,18 @@ public class ChessGame implements IChessGame{
 	}
 	@Override
 	public void startNewGame() {
-		// TODO Auto-generated method stub
-		
+		gameBoard=new Piece[8][8];
+		whiteTeam=new WhiteTeam(this);
+		blackTeam=new BlackTeam(this);
+		initializeBoardCells();
+		playerTurn="white";
+		gameStatus="ONGOING";
+		moveValidator=new MoveValidator(this);
+		gameStatusHandler=new GameStatusHandler(this);
 	}
 	@Override
-	public void saveGameProgress(String fileName) {
-		// TODO Auto-generated method stub
+	public void saveGameProgress(File chosenFile) {
+		gameStorageHandler.saveGame(chosenFile);
 		
 	}
 	@Override
@@ -124,6 +135,7 @@ public class ChessGame implements IChessGame{
 	public String getGameStatus(){
 		return gameStatus;
 	}
+	
 	
 	
 	

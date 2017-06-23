@@ -28,5 +28,12 @@ public class JChessBoard {
 	public Pane getDisplayBoard(){
 		return elementsGenerator.getOverallBoardShape();
 	}
+	
+	
+	public void resetGameBoard() throws FileNotFoundException{
+		layoutGenerator.resetLayout();
+		//boardElements.getInnerBoard().add(king, 4, 0); boardElements.getBoardPieces()[0][4]=king;
+	}
+	
 
 }
