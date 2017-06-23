@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 
 
-public class MainBoard extends Application {
+public class MainChessGameB extends Application {
 	
 	//01_ATTRIBUTES
 	//*************************************************************

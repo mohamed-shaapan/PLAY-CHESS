@@ -10,11 +10,11 @@ public class Initializer {
 	private Elements elementsGenerator;
 	private Layout layoutGenerator;
 	private ActionListeners actionListernsGenerator;
-	private MainBoard chessBoard;
+	private MainChessGameB chessBoard;
 	
 	//02_CONSTRUCTOR
 	//********************************************************
-	public Initializer(MainBoard chessBoard) {
+	public Initializer(MainChessGameB chessBoard) {
 		elementsGenerator=new Elements();
 		layoutGenerator=new Layout(elementsGenerator);
 		actionListernsGenerator=new ActionListeners(elementsGenerator);
