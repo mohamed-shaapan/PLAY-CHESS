@@ -101,7 +101,14 @@ public class GameStatusHandler {
 			int fromRow=mate.getCurrentRow(); int fromCol=mate.getCurrentColumn();
 			//try all possible locations
 			ArrayList<int[]> nextValidLocations=mate.generateNextValidLocations();
-			for(int[] cell:nextValidLocations){
+			int [][] avoidConcurrency = nextValidLocations.toArray(new int[nextValidLocations.size()][2]);
+			/*
+			 * we need to avoid ConcurrentModificationException
+			 * because we're generating reference to nextValidLocations then
+			 * modifying the this variable (ArrayList) as we iterate over its elemtns
+			 * when we use .validateMove() function
+			 */
+			for(int[] cell:avoidConcurrency){
 				int toRow=cell[0]; int toCol=cell[1];
 				boolean isValidMove=moveValidator.validateMove(fromRow, fromCol, toRow, toCol);
 				if(isValidMove==true){
