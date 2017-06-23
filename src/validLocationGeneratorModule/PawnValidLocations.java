@@ -47,14 +47,30 @@ public class PawnValidLocations implements ValidLocations{
 		try{
 			if(piece.getTeam().equalsIgnoreCase("white")){
 				if(currentRow==piece.getInitialRow()){
+					String targetTeam=gameSet.getGameBoard()[currentRow-2][currentCol].getTeam();
+					if(targetTeam.equalsIgnoreCase("black")){
+						return;
+					}
 					nextValidLocations.addAll(locationGenerator.generateUpMoves(currentRow, currentCol, piece.getTeam(), 2));
 				}else{
+					String targetTeam=gameSet.getGameBoard()[currentRow-1][currentCol].getTeam();
+					if(targetTeam.equalsIgnoreCase("black")){
+						return;
+					}
 					nextValidLocations.addAll(locationGenerator.generateUpMoves(currentRow, currentCol, piece.getTeam(), 1));
 				}
 			}else{
 				if(currentRow==piece.getInitialRow()){
+					String targetTeam=gameSet.getGameBoard()[currentRow+2][currentCol].getTeam();
+					if(targetTeam.equalsIgnoreCase("white")){
+						return;
+					}
 					nextValidLocations.addAll(locationGenerator.generateDownMoves(currentRow, currentCol, piece.getTeam(), 2));
 				}else{
+					String targetTeam=gameSet.getGameBoard()[currentRow+1][currentCol].getTeam();
+					if(targetTeam.equalsIgnoreCase("white")){
+						return;
+					}
 					nextValidLocations.addAll(locationGenerator.generateDownMoves(currentRow, currentCol, piece.getTeam(), 1));
 				}
 			}

@@ -11,11 +11,17 @@ public class KingStatusHandler {
 
 	//*************************************************************************
 	public static boolean isKingInDanger(ChessGame gameBoard, Piece king){
-		boolean verticalTest=isVerticalDnagerous(gameBoard, king);
+		//System.out.println("**********************");
+		boolean verticalTest=isVerticalDangerous(gameBoard, king);
 		boolean horizontalTest=isHorizotalDnagerous(gameBoard, king);
 		boolean diagonalATest=isFirstDiagonalDangerous(gameBoard, king);
 		boolean diagonalBTest=isDiagonalBDangerous(gameBoard, king);
 		boolean knightLocationTest=isKnightDangerous(gameBoard, king);
+		/*System.out.println("VDang "+verticalTest);
+		System.out.println("HDang "+horizontalTest);
+		System.out.println("D1Dang "+diagonalATest);
+		System.out.println("D2Dang "+diagonalBTest);
+		System.out.println("KNDang "+knightLocationTest);*/
 		if(verticalTest||horizontalTest||diagonalATest||diagonalBTest||knightLocationTest){
 			return true;
 		}
@@ -25,7 +31,7 @@ public class KingStatusHandler {
 	
 	//01_Test Vertical Dangerous
 	//**********************************************************************************
-	private static boolean isVerticalDnagerous(ChessGame gameBoard, Piece king){
+	private static boolean isVerticalDangerous(ChessGame gameBoard, Piece king){
 		boolean upTest=isUpDangerous(gameBoard, king);
 		boolean downTest=isDownDangerous(gameBoard, king);
 		if(upTest||downTest){
@@ -51,6 +57,7 @@ public class KingStatusHandler {
 				if(isThreat==true){
 					return true;
 				}
+				return false;
 			}catch(Exception ex){}
 		}
 		return false;
@@ -73,6 +80,7 @@ public class KingStatusHandler {
 				if(isThreat==true){
 					return true;
 				}
+				return false;
 			}catch(Exception ex){}
 		}
 		return false;
@@ -106,6 +114,7 @@ public class KingStatusHandler {
 				if(isThreat==true){
 					return true;
 				}
+				return false;
 			}catch(Exception ex){}
 		}
 		return false;
@@ -128,6 +137,7 @@ public class KingStatusHandler {
 				if(isThreat==true){
 					return true;
 				}
+				return false;
 			}catch(Exception ex){}
 		}
 		return false;
@@ -163,6 +173,7 @@ public class KingStatusHandler {
 				if(isThreat==true){
 					return true;
 				}
+				return false;
 			}catch(Exception ex){}
 		}
 		return false;
@@ -186,6 +197,7 @@ public class KingStatusHandler {
 				if(isThreat==true){
 					return true;
 				}
+				return false;
 			}catch(Exception ex){}
 		}
 		return false;
@@ -220,6 +232,7 @@ public class KingStatusHandler {
 				if(isThreat==true){
 					return true;
 				}
+				return false;
 			}catch(Exception ex){}
 		}
 		return false;
@@ -243,6 +256,7 @@ public class KingStatusHandler {
 				if(isThreat==true){
 					return true;
 				}
+				return false;
 			}catch(Exception ex){}
 		}
 		return false;

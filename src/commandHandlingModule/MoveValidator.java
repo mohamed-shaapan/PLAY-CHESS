@@ -89,11 +89,12 @@ public class MoveValidator {
 		String targetCellTeam=chessBoard.getGameBoard()[toRow][toCol].getTeam();
 		Piece targetCellPiece=chessBoard.getGameBoard()[toRow][toCol];
 		if(targetCellTeam.equalsIgnoreCase(enemy)){
-			chessBoard.getGameBoard()[fromRow][fromCol].setActive(false);
+			chessBoard.getGameBoard()[toRow][toCol].setActive(false);
 		}
-		//move piece to specified location****************
+		//leave empty spot/cell at FromCell
 		Piece pieceToMove=chessBoard.getGameBoard()[fromRow][fromCol];
 		chessBoard.getGameBoard()[fromRow][fromCol]=new BlankPiece();
+		//move piece to specified location****************
 		chessBoard.getGameBoard()[toRow][toCol]=pieceToMove;
 		pieceToMove.setCurrentRow(toRow); pieceToMove.setCurrentColumn(toCol);
 		//test king status********************************
@@ -110,7 +111,7 @@ public class MoveValidator {
 		pieceToMove.setCurrentRow(fromRow); pieceToMove.setCurrentColumn(fromCol);
 		chessBoard.getGameBoard()[toRow][toCol]=targetCellPiece;
 		if(targetCellTeam.equalsIgnoreCase(enemy)){
-			chessBoard.getGameBoard()[fromRow][fromCol].setActive(true);
+			chessBoard.getGameBoard()[toRow][toCol].setActive(true);
 		}
 		
 		return isKingInDanger;

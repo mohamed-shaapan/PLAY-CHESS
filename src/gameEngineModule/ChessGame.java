@@ -64,6 +64,7 @@ public class ChessGame implements IChessGame{
 				System.out.println("Invalid Move!!");
 				return false;
 			}
+			//System.out.println("Move Approved");
 			//apply move
 			MovePieceCommand moveOperation=new MovePieceCommand(this, fromRow, fromCol, toRow, toCol);
 			moveOperation.execute();
