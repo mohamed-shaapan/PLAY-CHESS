@@ -34,6 +34,7 @@ public class ElementGenerator {
 	//D_GAME STATUS
 	//******************************
 	private Label gameStatusLabel;
+	private Label gameStatusDisplayLabel;
 	private Label playerTurnLabel;
 	private Label gameDurationDisplayLabel;
 	
@@ -81,6 +82,7 @@ public class ElementGenerator {
 		//B_GAME STATUS
 		//******************************
 		gameStatusLabel=new Label("Game Status");
+		gameStatusDisplayLabel=new Label("");
 		playerTurnLabel=new Label("PLAYER TURN : WHITE");
 		gameDurationDisplayLabel=new Label("17:43");
 		
@@ -163,7 +165,12 @@ public class ElementGenerator {
 		return gameStatusLabel;
 	}
 
-
+	
+	public Label getGameStatusDisplayLabel() {
+		return gameStatusDisplayLabel;
+	}
+	
+	
 	public Label getPlayerTurnLabel() {
 		return playerTurnLabel;
 	}
@@ -216,6 +223,7 @@ public class ElementGenerator {
 	public void resetChessBoard() throws FileNotFoundException{
 		chessBoard=new JChessBoard();
 	}
+
 
 
 	

@@ -42,6 +42,8 @@ public class ActionListenersGenerator {
 	//*************************************************************
 	public void initialize(){
 	
+		
+		updateDisplayedStatus();
 		//buttons action listeners
 		generateNewGameButtonActionListeners();
 		generateLoadGameButtonActionListeners();
@@ -122,6 +124,7 @@ public class ActionListenersGenerator {
 	
 	//**************************************************
 	private void moveGuiPiece(int fromRow, int fromCol, int toRow, int toCol){
+		updateDisplayedStatus();
 		//remove enemy from target cell if exists
 		ImageView enemyPiece=boardElements.getBoardPieces()[toRow][toCol];
 		boardElements.getInnerBoard().getChildren().remove(enemyPiece);
@@ -143,6 +146,14 @@ public class ActionListenersGenerator {
 	//04_BUTTON ACTION LISTENERS
 	//***************************************************************************
 	//***************************************************************************
+	
+	private void updateDisplayedStatus(){
+		String gameStatus=appElements.getGameEngine().getGameStatus();
+		appElements.getGameStatusDisplayLabel().setText(gameStatus);
+		
+		String playerTurn="Player Turn : "+appElements.getGameEngine().getPlayerTurn();
+		appElements.getPlayerTurnLabel().setText(playerTurn);
+	}
 	
 	
 	//START NEW GAME BUTTON********************

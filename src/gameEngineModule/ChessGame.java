@@ -33,7 +33,7 @@ public class ChessGame implements IChessGame{
 		blackTeam=new BlackTeam(this);
 		initializeBoardCells();
 		playerTurn="white";
-		gameStatus="ONGOING";
+		gameStatus="ON GOING";
 		moveValidator=new MoveValidator(this);
 		gameStatusHandler=new GameStatusHandler(this);
 		gameStorageHandler=new GameStorageHandler(this);
@@ -76,7 +76,7 @@ public class ChessGame implements IChessGame{
 			//change player turn
 			playerTurn=gameBoard[toRow][toCol].getEnemy();
 			//update game status
-			gameStatusHandler.updateGameStatus(playerTurn);
+			gameStatus=gameStatusHandler.updateGameStatus(playerTurn);
 			return true;
 		}
 		return false;

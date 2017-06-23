@@ -12,6 +12,7 @@ public class GameStatusHandler {
 	private boolean gameOver;
 	private ChessGame gameBoard;
 	private MoveValidator moveValidator;
+	private String gameStatus;
 	
 	
 	//02_CONSTRUCTOR
@@ -20,6 +21,7 @@ public class GameStatusHandler {
 		gameOver=false;
 		this.gameBoard=gameBoard;
 		moveValidator=new MoveValidator(gameBoard);
+		gameStatus="ON GOING";
 	}
 	
 	
@@ -29,7 +31,8 @@ public class GameStatusHandler {
 		return gameOver;
 	}
 	
-	public void updateGameStatus(String nextPlayerTurn){
+	
+	public String updateGameStatus(String nextPlayerTurn){
 		//01_identify team to examine************
 		Piece kingToTest;
 		if(nextPlayerTurn.equalsIgnoreCase("white")){
@@ -40,17 +43,25 @@ public class GameStatusHandler {
 		//02_perform examinations****************
 		if(isCheckMate(kingToTest)){
 			gameOver=true;
-			System.out.println("CHECK MATE! - GAME OVER");
-			System.out.printf("%s Team Wins!", kingToTest.getEnemy());
+			gameStatus="CHECK MATE!"+" - "+kingToTest.getEnemy()+" "+"Team Wins";
+			//System.out.println("CHECK MATE! - GAME OVER");
+			//System.out.printf("%s Team Wins!", kingToTest.getEnemy());
+			return gameStatus;
 		}else if(isStaleMate(kingToTest)){
 			gameOver=true;
-			System.out.println("STALE MATE! - GAME OVER");
+			gameStatus="STALE MATE!"+" - "+" GAME OVER NO WINNER!";
+			//System.out.println("STALE MATE! - GAME OVER");
+			return gameStatus;
 		}else{
 			boolean isKingInDanger=KingStatusHandler.isKingInDanger(gameBoard, kingToTest);
 			if(isKingInDanger==true){
-				System.out.println("CHECK! - "+kingToTest.getTeam());	
+				gameStatus="CHECK!"+" - "+kingToTest.getTeam()+" "+"Team";
+				//System.out.println("CHECK! - "+kingToTest.getTeam());
+				return gameStatus;
 			}
+			gameStatus="ON GOING";
 		}
+		return gameStatus;
 		
 	}
 	
@@ -119,5 +130,6 @@ public class GameStatusHandler {
 		
 		return true;
 	}
+	//*********************************************************
 	
 }

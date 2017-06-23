@@ -37,6 +37,7 @@ public class LayoutGenerator {
 		gameStatusBlock.getChildren().add(appElements.getGameStatusLabel());
 		VBox tmp31=new VBox();
 		tmp31.getChildren().add(appElements.getPlayerTurnLabel());
+		tmp31.getChildren().add(appElements.getGameStatusDisplayLabel());
 		appElements.getGameDurationDisplayLabel().setFont(Font.font(25));
 		tmp31.getChildren().add(appElements.getGameDurationDisplayLabel());
 		tmp31.setSpacing(15);
